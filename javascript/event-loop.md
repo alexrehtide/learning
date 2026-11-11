@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** JavaScript выполняет код в одном потоке, и каждый кусок кода работает до конца (run-to-completion): его ничто не прерывает. Event loop (цикл событий) — механизм хоста (браузера, Node), который решает, что выполнять следующим. Он берёт одну задачу (task) из очереди, выполняет её, затем **полностью** опустошает очередь микрозадач (microtasks: промисы, `queueMicrotask`, `MutationObserver`) и время от времени отдаёт кадр рендерингу: `requestAnimationFrame`, стили, layout, отрисовка. Отсюда вытекают порядок `console.log`, `Promise.then` и `setTimeout`, «зависания» страницы и `nextTick` во Vue.
 
-**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Итераторы и генераторы](./iterators-and-generators.md)
+**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Итераторы и генераторы](./iterators-and-generators.md), [Промисы](./promises.md)
 
 ## Теория
 
