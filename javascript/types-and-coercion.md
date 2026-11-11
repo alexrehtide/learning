@@ -7,6 +7,8 @@ level: ядро
 
 > **Коротко.** В JavaScript восемь типов: семь примитивов (`undefined`, `null`, `boolean`, `number`, `bigint`, `string`, `symbol`) и `object`. Примитивы неизменяемы и сравниваются по значению, объекты сравниваются по ссылке. Неявное приведение типов (coercion) — не магия, а несколько абстрактных операций спецификации: `ToPrimitive`, `ToNumber`, `ToString`, `ToBoolean`. Операторы `+`, `==`, `<` и `if` просто вызывают их в определённом порядке.
 
+**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md)
+
 ## Теория
 
 ### Восемь типов
@@ -166,7 +168,7 @@ level: ядро
 | `Object.prototype.toString.call(x)` | `"[object Null]"`, `"[object Date]"`, `"[object Map]"` | подменяется через `Symbol.toStringTag` |
 | `Number.isNaN(x)` | без приведения | глобальный `isNaN('abc')` — `true`, потому что приводит к числу |
 
-`typeof` необъявленной переменной — `"undefined"` без ошибки. Но для `let`/`const` в temporal dead zone `typeof` бросает `ReferenceError`.
+`typeof` необъявленной переменной — `"undefined"` без ошибки. Но для `let`/`const` в [temporal dead zone](./scope-and-hoisting.md#temporal-dead-zone) `typeof` бросает `ReferenceError`.
 
 ### Vue: почему примитив нельзя сделать `reactive`
 
