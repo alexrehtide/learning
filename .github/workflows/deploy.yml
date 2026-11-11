@@ -1,9 +1,7 @@
 name: Deploy site
 
+# Manual only: run once a section is complete (gh workflow run deploy.yml).
 on:
-  push:
-    branches: [main]
-  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -30,14 +28,11 @@ jobs:
       - run: npm run readme:check
       - run: npm run build
       - uses: actions/configure-pages@v6
-        if: github.event_name != 'pull_request'
       - uses: actions/upload-pages-artifact@v5
-        if: github.event_name != 'pull_request'
         with:
           path: .vitepress/dist
 
   deploy:
-    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
