@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** В JavaScript восемь типов: семь примитивов (`undefined`, `null`, `boolean`, `number`, `bigint`, `string`, `symbol`) и `object`. Примитивы неизменяемы и сравниваются по значению, объекты сравниваются по ссылке. Неявное приведение типов (coercion) — не магия, а несколько абстрактных операций спецификации: `ToPrimitive`, `ToNumber`, `ToString`, `ToBoolean`. Операторы `+`, `==`, `<` и `if` просто вызывают их в определённом порядке.
 
-**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Функции и `this`](./functions-and-this.md), [Прототипы и классы](./prototypes-and-classes.md), [Дескрипторы свойств, `Proxy` и `Reflect`](./property-descriptors-and-proxy.md)
+**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Функции и `this`](./functions-and-this.md), [Прототипы и классы](./prototypes-and-classes.md), [Дескрипторы свойств, `Proxy` и `Reflect`](./property-descriptors-and-proxy.md), [Деструктуризация, spread/rest и современный синтаксис](./modern-syntax.md)
 
 ## Теория
 

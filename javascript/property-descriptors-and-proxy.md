@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Свойство объекта — это ключ и набор атрибутов: `value`/`writable` у data-свойства или `get`/`set` у аксессора, плюс `enumerable` и `configurable`. Атрибутами управляют `Object.defineProperty`, `freeze` и `seal`. `Proxy` идёт дальше и перехватывает сами операции над объектом (чтение, запись, `in`, `delete`, перечисление ключей), но обязан соблюдать инварианты цели. `Reflect` даёт стандартную реализацию каждой операции, и прежде всего правильный `receiver`. На `defineProperty` была построена реактивность Vue 2, на `Proxy` — Vue 3.
 
-**Связанные темы:** [Прототипы и классы](./prototypes-and-classes.md), [Функции и `this`](./functions-and-this.md), [Типы данных и приведение типов](./types-and-coercion.md)
+**Связанные темы:** [Прототипы и классы](./prototypes-and-classes.md), [Функции и `this`](./functions-and-this.md), [Типы данных и приведение типов](./types-and-coercion.md), [Деструктуризация, spread/rest и современный синтаксис](./modern-syntax.md)
 
 ## Теория
 
