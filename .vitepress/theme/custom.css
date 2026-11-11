@@ -1,0 +1,28 @@
+.library-toc .progress {
+  color: var(--vp-c-text-2);
+}
+
+.library-toc h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.library-toc .level,
+.library-toc .soon {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: var(--vp-c-text-2);
+  background: var(--vp-c-default-soft);
+}
+
+.library-toc .soon {
+  margin-left: 8px;
+}
+
+.library-toc li.pending {
+  color: var(--vp-c-text-3);
+}

@@ -1,0 +1,15 @@
+{
+  "name": "learning",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "readme": "node scripts/readme.mjs",
+    "readme:check": "node scripts/readme.mjs --check"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}
