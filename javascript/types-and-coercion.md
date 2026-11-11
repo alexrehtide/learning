@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** В JavaScript восемь типов: семь примитивов (`undefined`, `null`, `boolean`, `number`, `bigint`, `string`, `symbol`) и `object`. Примитивы неизменяемы и сравниваются по значению, объекты сравниваются по ссылке. Неявное приведение типов (coercion) — не магия, а несколько абстрактных операций спецификации: `ToPrimitive`, `ToNumber`, `ToString`, `ToBoolean`. Операторы `+`, `==`, `<` и `if` просто вызывают их в определённом порядке.
 
-**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Функции и `this`](./functions-and-this.md)
+**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Функции и `this`](./functions-and-this.md), [Прототипы и классы](./prototypes-and-classes.md)
 
 ## Теория
 
@@ -255,7 +255,7 @@ true + true;           // 1 + 1                → 2
 :::
 
 ::: details Как надёжно проверить, что значение — массив, и почему instanceof не всегда подходит?
-`Array.isArray(x)`. `instanceof Array` проверяет, есть ли `Array.prototype` в цепочке прототипов, а у массива из другого realm (iframe, Node `vm`) — свой `Array.prototype`, и проверка даёт `false`. `Array.isArray` смотрит на внутреннюю природу объекта (exotic Array object), поэтому работает между realm и для `Proxy` над массивом.
+`Array.isArray(x)`. `instanceof Array` проверяет, есть ли `Array.prototype` в [цепочке прототипов](./prototypes-and-classes.md), а у массива из другого realm (iframe, Node `vm`) — свой `Array.prototype`, и проверка даёт `false`. `Array.isArray` смотрит на внутреннюю природу объекта (exotic Array object), поэтому работает между realm и для `Proxy` над массивом.
 
 Для остальных встроенных типов есть `Object.prototype.toString.call(x)` → `"[object Date]"`, `"[object Map]"`, но его можно подменить через `Symbol.toStringTag`. Для примитивов достаточно `typeof`, с поправкой на `null`.
 :::
