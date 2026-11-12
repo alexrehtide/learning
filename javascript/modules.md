@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** ES-модули (ESM) — модульная система самого языка: `import`/`export` статичны, граф модулей строится и связывается **до** выполнения кода, а импорт — это живая ссылка на привязку (live binding), а не копия значения. CommonJS — система Node: `require()` — обычная функция, которая синхронно выполняет файл и возвращает объект `module.exports`. Статичность ESM даёт tree shaking, top-level await и загрузку в браузере. Современный Node умеет обе системы и `require()` синхронного ES-модуля.
 
-**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Замыкания](./closures.md), [Функции и `this`](./functions-and-this.md), [Event loop](./event-loop.md), [async/await, обработка ошибок и отмена](./async-await.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md)
+**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Замыкания](./closures.md), [Функции и `this`](./functions-and-this.md), [Event loop](./event-loop.md), [async/await, обработка ошибок и отмена](./async-await.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Same-origin policy, CORS и cookies](../network/cors-and-cookies.md)
 
 ## Теория
 
@@ -127,7 +127,7 @@ Node оборачивает файл в функцию — **module wrapper**:
 ### ESM в браузере
 
 - `<script type="module">` по умолчанию **отложен**, как `defer`: загружается параллельно, выполняется после разбора HTML, в порядке документа. `async` на модуле выполняет его сразу по готовности графа.
-- Модули загружаются в режиме CORS: с другого origin нужен `Access-Control-Allow-Origin`, с `file://` модули не работают. MIME должен быть JavaScript.
+- Модули загружаются в [режиме CORS](../network/cors-and-cookies.md#cors-сервер-разрешает-чтение): с другого origin нужен `Access-Control-Allow-Origin`, с `file://` модули не работают. MIME должен быть JavaScript.
 - **Голые спецификаторы** (`import 'vue'`) браузер сам не разрешает. Нужна **import map** (`<script type="importmap">`) или сборщик, который перепишет пути.
 - `<script nomodule>` выполняется только в браузерах без поддержки модулей — так раньше отдавали legacy-сборку.
 - `<link rel="modulepreload">` заранее загружает и разбирает модуль вместе с зависимостями, срезая водопад запросов по графу. Vite вставляет его для чанков автоматически.
