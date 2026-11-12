@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** **XSS** (cross-site scripting, межсайтовый скриптинг) — выполнение чужого скрипта в origin вашей страницы. Скрипт получает всё, что есть у страницы: DOM, токены в хранилищах, право слать запросы от имени пользователя. Защита — не «фильтр плохих строк», а правило: данные попадают в документ только через API, которые понимают контекст (`textContent`, `setAttribute`, экранирование под HTML, атрибут, URL). Vue делает это сам для <code v-pre>{{ }}</code> и `:attr`, но не проверяет URL, не защищает `v-html`, `v-bind="obj"` и шаблоны, собранные из ввода. Последние рубежи — санитайзинг, Trusted Types, CSP и `HttpOnly`.
 
-**Связанные темы:** [DOM API и observers](../browser/dom.md), [Same-origin policy, CORS и cookies](../network/cors-and-cookies.md), [Хранилища браузера](../network/browser-storage.md), [Content Security Policy](./csp.md)
+**Связанные темы:** [DOM API и observers](../browser/dom.md), [Same-origin policy, CORS и cookies](../network/cors-and-cookies.md), [Хранилища браузера](../network/browser-storage.md), [Content Security Policy](./csp.md), [Аутентификация на фронтенде](./authentication.md)
 
 ## Теория
 
@@ -124,7 +124,7 @@ XSS нужно предотвращать, но рассчитывать, что
 - **`HttpOnly`** на cookie сессии: скрипт не прочитает её и не унесёт. Но действовать от имени пользователя, пока вкладка открыта, он может. Подробнее — в [Same-origin policy, CORS и cookies](../network/cors-and-cookies.md) и [Хранилищах браузера](../network/browser-storage.md).
 - **Отдельный origin для пользовательского контента**: загрузки и HTML пользователей отдаются с `usercontent.example` (не поддомен основного сайта — иначе same-site), плюс `X-Content-Type-Options: nosniff` и `Content-Disposition: attachment`.
 - **`<iframe sandbox>`** без `allow-same-origin` даёт opaque origin. Документация Vue называет его единственным местом, где пользовательский HTML/CSS можно показывать без оговорок.
-- Короткоживущие токены и повторная аутентификация для критичных действий (смена email, пароля, платёж).
+- Короткоживущие токены и повторная аутентификация для критичных действий (смена email, пароля, платёж) — см. [Аутентификацию на фронтенде](./authentication.md).
 
 ## Примеры
 

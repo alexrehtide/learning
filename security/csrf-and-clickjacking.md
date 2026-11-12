@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Все три атаки используют чужое доверие, а не баг в вашем коде. **CSRF** (Cross-Site Request Forgery, подделка межсайтового запроса): браузер сам прикладывает cookies к запросу, который отправила чужая страница. Защита — проверить, откуда пришёл изменяющий запрос (`Sec-Fetch-Site`, `Origin`) или потребовать токен, который чужая страница не может знать. `SameSite` — сильный дополнительный слой, но не единственный. **Clickjacking**: вашу страницу встраивают в прозрачный iframe, и пользователь кликает по ней, не видя этого. Защита — `frame-ancestors` в CSP (и `X-Frame-Options` для старых браузеров). **Supply chain**: вредоносный код приходит из зависимости или CDN и выполняется с правами вашего origin или на машине разработчика и CI. Защита — lockfile и `npm ci`, блокировка install-скриптов, задержка обновлений, SRI для чужих скриптов и минимум зависимостей.
 
-**Связанные темы:** [Same-origin policy, CORS и cookies](../network/cors-and-cookies.md), [XSS и безопасный вывод во Vue](./xss.md), [Content Security Policy](./csp.md), [Хранилища браузера](../network/browser-storage.md), [Real-time: polling, SSE, WebSocket](../network/realtime.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [Оптимизация загрузки](../performance/loading.md)
+**Связанные темы:** [Same-origin policy, CORS и cookies](../network/cors-and-cookies.md), [XSS и безопасный вывод во Vue](./xss.md), [Content Security Policy](./csp.md), [Хранилища браузера](../network/browser-storage.md), [Real-time: polling, SSE, WebSocket](../network/realtime.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [Оптимизация загрузки](../performance/loading.md), [Аутентификация на фронтенде](./authentication.md)
 
 ## Теория
 

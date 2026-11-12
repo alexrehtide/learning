@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** У браузера несколько хранилищ, и выбирают их по трём осям: синхронность, объём и кто имеет доступ. **Cookies** маленькие и сами едут на сервер с каждым запросом. **`localStorage`/`sessionStorage`** синхронные, только строки и около 5 млн символов, а в воркерах их нет. **IndexedDB** асинхронная, транзакционная, хранит структурированные данные на сотни мегабайт и доступна из воркеров. **Cache API** хранит пары запрос–ответ, **OPFS** — файлы. Всё, кроме cookies, изолировано по origin, делит одну квоту и вытесняется целиком. Во встроенных cross-site iframe хранилища дополнительно разделены по сайту верхнего уровня (партиционирование).
 
-**Связанные темы:** [Same-origin policy, CORS и cookies](./cors-and-cookies.md), [HTTP-кэширование и CDN](./caching.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Event loop](../javascript/event-loop.md), [Промисы](../javascript/promises.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Real-time: polling, SSE, WebSocket](./realtime.md), [XSS и безопасный вывод во Vue](../security/xss.md)
+**Связанные темы:** [Same-origin policy, CORS и cookies](./cors-and-cookies.md), [HTTP-кэширование и CDN](./caching.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Event loop](../javascript/event-loop.md), [Промисы](../javascript/promises.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Real-time: polling, SSE, WebSocket](./realtime.md), [XSS и безопасный вывод во Vue](../security/xss.md), [Аутентификация на фронтенде](../security/authentication.md)
 
 ## Теория
 
@@ -125,7 +125,7 @@ IndexedDB, Cache API и OPFS делят одну квоту origin. Цифры �
 
 ### Где хранить токены
 
-Мостик в раздел «Безопасность». Всё, что доступно JavaScript (`localStorage`, `sessionStorage`, IndexedDB, не-`HttpOnly` cookie), прочитает любой скрипт, который выполнился на странице: XSS или скомпрометированная зависимость унесёт долгоживущий токен, и злоумышленник будет пользоваться им со своей машины. Распространённая схема: короткий access-токен в памяти (переменная, не хранилище), refresh-токен или сессия — в cookie `HttpOnly; Secure; SameSite=Lax` (или `Strict`) на своём домене. Цена cookie — защита от CSRF (`SameSite`, проверка `Origin`). `HttpOnly` не спасает от XSS полностью: скрипт всё равно отправит запрос от имени пользователя, пока тот на странице. Он лишь не даёт унести учётные данные.
+Мостик в раздел «Безопасность»; архитектуры (BFF, ротация refresh-токенов) — в [Аутентификации на фронтенде](../security/authentication.md). Всё, что доступно JavaScript (`localStorage`, `sessionStorage`, IndexedDB, не-`HttpOnly` cookie), прочитает любой скрипт, который выполнился на странице: XSS или скомпрометированная зависимость унесёт долгоживущий токен, и злоумышленник будет пользоваться им со своей машины. Распространённая схема: короткий access-токен в памяти (переменная, не хранилище), refresh-токен или сессия — в cookie `HttpOnly; Secure; SameSite=Lax` (или `Strict`) на своём домене. Цена cookie — защита от CSRF (`SameSite`, проверка `Origin`). `HttpOnly` не спасает от XSS полностью: скрипт всё равно отправит запрос от имени пользователя, пока тот на странице. Он лишь не даёт унести учётные данные.
 
 ## Примеры
 
