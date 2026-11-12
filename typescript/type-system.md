@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** TypeScript сравнивает типы по **форме**, а не по имени: значение подходит под тип, если у него есть нужные члены с совместимыми типами. Это структурная типизация (structural typing), и она описывает то, как JavaScript-код на самом деле работает с объектами. Тип удобно понимать как множество значений: `unknown` — все значения, `never` — пустое множество, `|` — объединение, `&` — пересечение. Типы стираются при компиляции, поэтому в рантайме их нет. `type` и `interface` почти взаимозаменяемы. Главная разница: `interface` можно дополнить повторным объявлением, а `type` умеет описывать не только объекты.
 
-**Связанные темы:** [Сужение типов и discriminated unions](./narrowing.md), [Generics](./generics.md), [Типы данных и приведение типов](../javascript/types-and-coercion.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [Функции и `this`](../javascript/functions-and-this.md), [Модули: ESM и CommonJS](../javascript/modules.md)
+**Связанные темы:** [Сужение типов и discriminated unions](./narrowing.md), [Generics](./generics.md), [Utility, conditional и mapped types](./type-level-programming.md), [Типы данных и приведение типов](../javascript/types-and-coercion.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [Функции и `this`](../javascript/functions-and-this.md), [Модули: ESM и CommonJS](../javascript/modules.md)
 
 ## Теория
 

@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Сужение (narrowing) — это анализ потока управления (control flow analysis): компилятор идёт по веткам кода и в каждой точке знает более точный тип переменной, чем объявленный. Сужают обычные JavaScript-проверки: `typeof`, `===`, `in`, `instanceof`, проверка на истинность, присваивание, а также свои type guards и assertion functions. Discriminated union — объединение объектов с общим полем-литералом, по которому `switch` выбирает ровно один вариант. Остаток после всех веток — `never`, и на этом строится проверка исчерпываемости.
 
-**Связанные темы:** [Система типов: структурная типизация, `type` и `interface`](./type-system.md), [Generics](./generics.md), [Типы данных и приведение типов](../javascript/types-and-coercion.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md)
+**Связанные темы:** [Система типов: структурная типизация, `type` и `interface`](./type-system.md), [Generics](./generics.md), [Utility, conditional и mapped types](./type-level-programming.md), [Типы данных и приведение типов](../javascript/types-and-coercion.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md)
 
 ## Теория
 
@@ -383,7 +383,7 @@ function match<T extends { kind: string }, R>(value: T, handlers: Handlers<T, R>
 
 Внутри `match` два `as`, и без них не обойтись. Компилятор не связывает тип `value.kind` с типом `value`: для него `handlers[value.kind]` — объединение всех обработчиков, и вызвать его с `value` нельзя. Это ограничение называют «correlated unions» (issue microsoft/TypeScript#30581). Небезопасный код локализован в одной функции, а снаружи API строго типизирован. Это обычный приём библиотек вроде ts-pattern.
 
-Сравнение со `switch` + `assertNever`: `match` — выражение, его удобно использовать в `computed` и шаблонах. Зато `switch` не требует отдельной функции и лучше читается при сложных ветках. Подробнее о mapped и conditional types — в теме «Utility, conditional и mapped types».
+Сравнение со `switch` + `assertNever`: `match` — выражение, его удобно использовать в `computed` и шаблонах. Зато `switch` не требует отдельной функции и лучше читается при сложных ветках. Подробнее о mapped и conditional types — в теме [«Utility, conditional и mapped types»](./type-level-programming.md).
 
 Сложность: O(1) по времени — один поиск по ключу.
 :::
