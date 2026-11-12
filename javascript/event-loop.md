@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** JavaScript выполняет код в одном потоке, и каждый кусок кода работает до конца (run-to-completion): его ничто не прерывает. Event loop (цикл событий) — механизм хоста (браузера, Node), который решает, что выполнять следующим. Он берёт одну задачу (task) из очереди, выполняет её, затем **полностью** опустошает очередь микрозадач (microtasks: промисы, `queueMicrotask`, `MutationObserver`) и время от времени отдаёт кадр рендерингу: `requestAnimationFrame`, стили, layout, отрисовка. Отсюда вытекают порядок `console.log`, `Promise.then` и `setTimeout`, «зависания» страницы и `nextTick` во Vue.
 
-**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Итераторы и генераторы](./iterators-and-generators.md), [Промисы](./promises.md), [async/await, обработка ошибок и отмена](./async-await.md), [Модули: ESM и CommonJS](./modules.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md)
+**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Итераторы и генераторы](./iterators-and-generators.md), [Промисы](./promises.md), [async/await, обработка ошибок и отмена](./async-await.md), [Модули: ESM и CommonJS](./modules.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [DOM API и observers](../browser/dom.md)
 
 ## Теория
 
@@ -42,7 +42,7 @@ level: ядро
 
 ### Микрозадачи
 
-Источники микрозадач: реакции промисов (`then`, `catch`, `finally`, продолжение после `await`), `queueMicrotask(fn)`, `MutationObserver`.
+Источники микрозадач: реакции промисов (`then`, `catch`, `finally`, продолжение после `await`), `queueMicrotask(fn)`, `MutationObserver` (подробно — [DOM API и observers](../browser/dom.md)).
 
 Важное следствие правила «опустошать до конца»: микрозадача, которая ставит новую микрозадачу, не отдаёт управление никогда. Бесконечная цепочка `then` или рекурсивный `queueMicrotask` вешают страницу так же, как `while (true)`: ни таймеры, ни клики, ни рендеринг не получат ход. Это называется голоданием (starvation).
 
