@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** JavaScript выполняет код в одном потоке, и каждый кусок кода работает до конца (run-to-completion): его ничто не прерывает. Event loop (цикл событий) — механизм хоста (браузера, Node), который решает, что выполнять следующим. Он берёт одну задачу (task) из очереди, выполняет её, затем **полностью** опустошает очередь микрозадач (microtasks: промисы, `queueMicrotask`, `MutationObserver`) и время от времени отдаёт кадр рендерингу: `requestAnimationFrame`, стили, layout, отрисовка. Отсюда вытекают порядок `console.log`, `Promise.then` и `setTimeout`, «зависания» страницы и `nextTick` во Vue.
 
-**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Итераторы и генераторы](./iterators-and-generators.md), [Промисы](./promises.md), [async/await, обработка ошибок и отмена](./async-await.md), [Модули: ESM и CommonJS](./modules.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [DOM API и observers](../browser/dom.md), [События и событийная модель](../browser/events.md), [Web Workers, Service Workers и PWA](../browser/workers.md)
+**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Итераторы и генераторы](./iterators-and-generators.md), [Промисы](./promises.md), [async/await, обработка ошибок и отмена](./async-await.md), [Модули: ESM и CommonJS](./modules.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [DOM API и observers](../browser/dom.md), [События и событийная модель](../browser/events.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Core Web Vitals и измерение](../performance/web-vitals.md)
 
 ## Теория
 
@@ -82,7 +82,7 @@ level: ядро
 
 ### Долгие задачи и отзывчивость
 
-Пока задача выполняется, браузер не обработает клик и не нарисует кадр. Задача дольше 50 мс считается **долгой** (long task) и попадает в Long Tasks API. От таких задач страдает метрика INP (Interaction to Next Paint). Лечение — разбить работу на куски и между ними **отдавать управление главному потоку** (yield to main):
+Пока задача выполняется, браузер не обработает клик и не нарисует кадр. Задача дольше 50 мс считается **долгой** (long task) и попадает в Long Tasks API. От таких задач страдает метрика [INP](../performance/web-vitals.md) (Interaction to Next Paint). Лечение — разбить работу на куски и между ними **отдавать управление главному потоку** (yield to main):
 
 - `await new Promise((r) => setTimeout(r, 0))` — работает везде, но продолжение встаёт в **конец** очереди, а на глубине вложенности 5+ ловит минимум в 4 мс;
 - `await scheduler.yield()` — продолжение получает повышенный приоритет и выполняется раньше других задач того же приоритета; `scheduler.postTask(fn, { priority })` — задачи с приоритетами `user-blocking`, `user-visible`, `background`;

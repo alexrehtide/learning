@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Браузер разбирает введённое, находит сервер (DNS), устанавливает соединение (TCP + TLS или QUIC) и получает HTML. HTML разбирается **потоково**: DOM строится по мере прихода байтов. Внешний CSS **блокирует рендеринг**, а через «таблицу стилей, блокирующую скрипты», — и выполнение синхронных скриптов. Синхронный `<script>` **блокирует парсер**. `defer` и `type="module"` выполняются после разбора, но до `DOMContentLoaded`, `async` — когда готов. Preload scanner заранее находит ресурсы в разметке, пока парсер стоит. Быстрая страница — это короткий **критический путь**: мало блокирующих ресурсов, мало байтов, мало сетевых round trip.
 
-**Связанные темы:** [Event loop](../javascript/event-loop.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [Web Workers, Service Workers и PWA](./workers.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [HTTP-кэширование и CDN](../network/caching.md)
+**Связанные темы:** [Event loop](../javascript/event-loop.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [Web Workers, Service Workers и PWA](./workers.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [HTTP-кэширование и CDN](../network/caching.md), [Core Web Vitals и измерение](../performance/web-vitals.md)
 
 ## Теория
 
@@ -190,7 +190,7 @@ function onReady(fn) {
 :::
 
 ::: details Чем DOMContentLoaded отличается от load
-`DOMContentLoaded` срабатывает на `document`, когда разбор закончен и выполнены defer- и module-скрипты: DOM готов, можно вешать обработчики. Он не ждёт изображения, iframe и async-скрипты, но косвенно ждёт CSS, если есть defer-скрипты. `load` срабатывает на `window`, когда загружено всё, что задерживает событие load: изображения, iframe, async-скрипты. Перед ним `readyState` становится `'complete'`, после — `pageshow`. Ни одно из них не означает, что пользователь что-то увидел: для этого есть метрики отрисовки (FCP, LCP).
+`DOMContentLoaded` срабатывает на `document`, когда разбор закончен и выполнены defer- и module-скрипты: DOM готов, можно вешать обработчики. Он не ждёт изображения, iframe и async-скрипты, но косвенно ждёт CSS, если есть defer-скрипты. `load` срабатывает на `window`, когда загружено всё, что задерживает событие load: изображения, iframe, async-скрипты. Перед ним `readyState` становится `'complete'`, после — `pageshow`. Ни одно из них не означает, что пользователь что-то увидел: для этого есть метрики отрисовки (FCP, LCP), см. «[Core Web Vitals и измерение](../performance/web-vitals.md)».
 :::
 
 ::: details Что такое критический путь рендеринга и как его сократить
