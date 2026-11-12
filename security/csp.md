@@ -132,7 +132,7 @@ Content-Security-Policy: script-src 'nonce-r4nd0m' 'strict-dynamic' 'report-samp
 
 ### `frame-ancestors`
 
-`frame-ancestors` задаёт, **кто может встроить** страницу во фрейм: `'none'` примерно равно `X-Frame-Options: DENY`, `'self'` — `SAMEORIGIN`, плюс можно перечислить origin. Директива проверяет всю цепочку предков, а не только родителя. В `default-src` она не откатывается и в `<meta>` не работает. Если она задана, браузеры игнорируют `X-Frame-Options`. Защита от clickjacking подробнее — в теме «CSRF, clickjacking и supply chain».
+`frame-ancestors` задаёт, **кто может встроить** страницу во фрейм: `'none'` примерно равно `X-Frame-Options: DENY`, `'self'` — `SAMEORIGIN`, плюс можно перечислить origin. Директива проверяет всю цепочку предков, а не только родителя. В `default-src` она не откатывается и в `<meta>` не работает. Если она задана, браузеры игнорируют `X-Frame-Options`. Защита от clickjacking подробнее — в теме [CSRF, clickjacking и supply chain](./csrf-and-clickjacking.md#clickjacking).
 
 ### Trusted Types в политике
 
