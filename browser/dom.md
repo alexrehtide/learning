@@ -35,9 +35,7 @@ DOM Standard описывает документ как дерево объек�
 - `input.value` — **текущее** значение, атрибут `value` — значение по умолчанию (отражается в `defaultValue`). Пользователь ввёл текст — свойство изменилось, атрибут нет. Так же устроены `checked` ↔ `defaultChecked` и `selected` ↔ `defaultSelected`.
 - `a.href` возвращает **абсолютный** URL, `getAttribute('href')` — то, что написано.
 - Булевы атрибуты (`disabled`, `hidden`) включены самим **наличием**: `disabled="false"` — это включено. Свойство же булево.
-- Нестандартный атрибут (`<div foo="1">`) в свойство не отражается: `div.foo === undefined`.
-
-Селекторы CSS (`[value="x"]`) смотрят на атрибуты, а не на свойства.
+- Нестандартный атрибут (`<div foo="1">`) в свойство не отражается: `div.foo === undefined`. А селекторы CSS (`[value="x"]`) смотрят на атрибуты, а не на свойства.
 
 Vue при патче решает сам: свойство или атрибут (сверено по исходникам `@vue/runtime-dom` 3.5.45, `shouldSetAsProp`). Правило — `key in el`: есть свойство, ставим свойство. Исключения ставятся атрибутом, потому что соответствующее свойство только для чтения или ведёт себя иначе: `form`, `list` у `<input>`, `width`/`height` у `<img>`, `<video>`, `<canvas>`, `spellcheck`, `draggable`. Модификатор `.prop` (`:foo.prop`, сокращение `.foo`) заставляет ставить свойство, `.attr` (`^foo` в скомпилированном коде) — атрибут.
 
@@ -80,12 +78,7 @@ Vue при патче решает сам: свойство или атрибу�
 
 Следит за изменениями дерева: дети (`childList`), атрибуты (`attributes`, `attributeFilter`, `attributeOldValue`), текст (`characterData`, `characterDataOldValue`), всё поддерево (`subtree`).
 
-```js
-const mo = new MutationObserver((records, observer) => { /* ... */ });
-mo.observe(target, { childList: true, subtree: true });
-```
-
-Как работает по DOM Standard:
+Как работает по DOM Standard (`new MutationObserver(cb).observe(target, { childList: true, subtree: true })`):
 
 - Каждое изменение создаёт `MutationRecord` и кладёт его в очередь наблюдателя. **Первая** запись ставит одну микрозадачу «notify mutation observers», следующие только добавляются. Колбэк получает **пачку** записей сразу после текущего синхронного кода — до промисов, поставленных позже, до рендеринга и до следующей задачи (задача 2).
 - `observe()` без `childList`, `attributes` и `characterData` бросает `TypeError`. `attributeOldValue` или `attributeFilter` сами включают `attributes`. Повторный `observe()` того же наблюдателя на тот же узел **заменяет** опции.
@@ -258,10 +251,8 @@ for (let i = 0; i < items.length; i++) {
 ```js
 // 1. Snapshot first
 for (const el of [...document.getElementsByClassName('todo')]) el.classList.remove('todo');
-
 // 2. Static collection from the start
 document.querySelectorAll('.todo').forEach((el) => el.classList.remove('todo'));
-
 // 3. Keep the live one, always take the first
 const items = document.getElementsByClassName('todo');
 while (items.length) items[0].classList.remove('todo');
@@ -442,9 +433,9 @@ ro.observe(card);
    ro.observe(container);
    ```
 
-3. **Отложить запись в следующий кадр** — `requestAnimationFrame(() => …)` внутри колбэка. Ошибки не будет, но один кадр покажет старую высоту, а цикл «запись → новое наблюдение» не исчезнет — просто станет покадровым.
+3. **Отложить запись в следующий кадр** — `requestAnimationFrame(() => …)` внутри колбэка. Ошибки не будет, но теряется главное преимущество колбэка до paint: один кадр покажет старую высоту, а цикл «запись → новое наблюдение» станет покадровым.
 
-Почему ошибку не стоит просто подавлять: это сигнал, что layout не сошёлся за кадр. Иногда она безвредна (одна лишняя итерация), но при циклической зависимости размеров страница дрожит и тратит кадр за кадром. Важно и то, что колбэк выполняется до paint: поэтому запись в нём не мерцает. Перенос в rAF ценой одного кадра это преимущество теряет.
+Ошибку не стоит просто подавлять: это сигнал, что layout не сошёлся за кадр. Иногда она безвредна (одна лишняя итерация), но при циклической зависимости размеров страница дрожит кадр за кадром.
 
 Сложность: O(1) на уведомление, но каждая запись в колбэке — дополнительный проход style и layout в кадре.
 :::
