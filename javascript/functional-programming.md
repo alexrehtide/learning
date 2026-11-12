@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Функциональный стиль в JavaScript держится на трёх вещах: функции — обычные значения, логика собирается из чистых функций, данные не меняются на месте, а заменяются новыми версиями. Язык ничего из этого не навязывает: объекты изменяемы, а `const` защищает привязку, а не значение. Иммутабельность здесь — дисциплина «изменение = копия» плюс инструменты: `Object.freeze`, методы массивов, которые возвращают копию (`toSorted`, `with`), и `structuredClone`. Во фронтенде она нужна там, где изменение определяют сравнением ссылок: `shallowRef`, мемоизация, история состояний, сравнение в `watch`.
 
-**Связанные темы:** [Замыкания](./closures.md), [Функции и `this`](./functions-and-this.md), [Деструктуризация, spread/rest и современный синтаксис](./modern-syntax.md), [Дескрипторы свойств, `Proxy` и `Reflect`](./property-descriptors-and-proxy.md), [Итераторы и генераторы](./iterators-and-generators.md), [Память и сборка мусора](./memory-and-gc.md)
+**Связанные темы:** [Замыкания](./closures.md), [Функции и `this`](./functions-and-this.md), [Деструктуризация, spread/rest и современный синтаксис](./modern-syntax.md), [Дескрипторы свойств, `Proxy` и `Reflect`](./property-descriptors-and-proxy.md), [Итераторы и генераторы](./iterators-and-generators.md), [Память и сборка мусора](./memory-and-gc.md), [Web Workers, Service Workers и PWA](../browser/workers.md)
 
 ## Теория
 
