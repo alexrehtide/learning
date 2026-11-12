@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** ES-модули (ESM) — модульная система самого языка: `import`/`export` статичны, граф модулей строится и связывается **до** выполнения кода, а импорт — это живая ссылка на привязку (live binding), а не копия значения. CommonJS — система Node: `require()` — обычная функция, которая синхронно выполняет файл и возвращает объект `module.exports`. Статичность ESM даёт tree shaking, top-level await и загрузку в браузере. Современный Node умеет обе системы и `require()` синхронного ES-модуля.
 
-**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Замыкания](./closures.md), [Функции и `this`](./functions-and-this.md), [Event loop](./event-loop.md), [async/await, обработка ошибок и отмена](./async-await.md)
+**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Замыкания](./closures.md), [Функции и `this`](./functions-and-this.md), [Event loop](./event-loop.md), [async/await, обработка ошибок и отмена](./async-await.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md)
 
 ## Теория
 
