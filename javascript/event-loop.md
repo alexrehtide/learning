@@ -88,6 +88,8 @@ level: ядро
 - `await scheduler.yield()` — продолжение получает повышенный приоритет и выполняется раньше других задач того же приоритета; `scheduler.postTask(fn, { priority })` — задачи с приоритетами `user-blocking`, `user-visible`, `background`;
 - перенос вычислений в [Web Worker](../browser/workers.md) — у воркера свой event loop и свой поток.
 
+Какой способ когда выбирать и почему `scheduler.yield()` не годится для долгой фоновой работы — в «[Оптимизации runtime и профилировании](../performance/runtime.md)».
+
 `await Promise.resolve()` управление **не** отдаёт: это микрозадача, она выполнится до рендеринга и до обработки ввода.
 
 > [!NOTE]

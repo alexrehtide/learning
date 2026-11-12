@@ -87,7 +87,7 @@ INP строится на **Event Timing API**. Для каждого событ
 > [!WARNING]
 > Проверено в Chromium 157. Наблюдатель `event` по умолчанию получает только события с `duration` ≥ 104 мс (`durationThreshold`, минимум — 16 мс). Клик с обработчиком на 50 мс (`duration` 56) виден только при `durationThreshold: 16`. `pointerdown`, `pointerup` и `click` одного клика получили общий `interactionId`, а `mouseup` — `0`. В Chromium `interactionId` соседних взаимодействий растёт с шагом 7, а не 1.
 
-Связь с event loop прямая. Input delay — это долгая задача, которая уже идёт в момент ввода. Presentation delay — работа шага update the rendering. Подробно — в «[Event loop](../javascript/event-loop.md)» и «[Конвейере рендеринга](../browser/rendering-pipeline.md)», лечение — в «Оптимизации runtime и профилировании».
+Связь с event loop прямая. Input delay — это долгая задача, которая уже идёт в момент ввода. Presentation delay — работа шага update the rendering. Подробно — в «[Event loop](../javascript/event-loop.md)» и «[Конвейере рендеринга](../browser/rendering-pipeline.md)», лечение — в «[Оптимизации runtime и профилировании](./runtime.md)».
 
 ### CLS: всплески сдвигов
 

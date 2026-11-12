@@ -65,7 +65,7 @@ for (const el of items) {
 Каждая итерация пишет стиль, а следующая читает `offsetWidth` — layout заново. Стоимость одного layout зависит от размера затронутого поддерева, в худшем случае — всей страницы. Итог — O(n) layout'ов, каждый до O(N) узлов. Исправление — разделить фазы: сначала все чтения, потом все записи. Тогда layout будет один, в кадре.
 
 > [!TIP]
-> В Chrome DevTools (Performance) принудительный layout помечается фиолетовым блоком **Layout** с предупреждением «Forced reflow is a likely performance bottleneck» и ссылкой на строку кода. Подробно о профилировании — раздел «Производительность».
+> В Chrome DevTools (Performance) принудительный layout помечается фиолетовым блоком **Layout** с предупреждением «Forced reflow is a likely performance bottleneck» и ссылкой на строку кода. Подробно о профилировании — «[Оптимизация runtime и профилирование](../performance/runtime.md)».
 
 ### Paint и слои
 
