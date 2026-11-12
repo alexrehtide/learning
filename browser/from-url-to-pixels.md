@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Браузер разбирает введённое, находит сервер (DNS), устанавливает соединение (TCP + TLS или QUIC) и получает HTML. HTML разбирается **потоково**: DOM строится по мере прихода байтов. Внешний CSS **блокирует рендеринг**, а через «таблицу стилей, блокирующую скрипты», — и выполнение синхронных скриптов. Синхронный `<script>` **блокирует парсер**. `defer` и `type="module"` выполняются после разбора, но до `DOMContentLoaded`, `async` — когда готов. Preload scanner заранее находит ресурсы в разметке, пока парсер стоит. Быстрая страница — это короткий **критический путь**: мало блокирующих ресурсов, мало байтов, мало сетевых round trip.
 
-**Связанные темы:** [Event loop](../javascript/event-loop.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [Web Workers, Service Workers и PWA](./workers.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [HTTP-кэширование и CDN](../network/caching.md), [Core Web Vitals и измерение](../performance/web-vitals.md)
+**Связанные темы:** [Event loop](../javascript/event-loop.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [Web Workers, Service Workers и PWA](./workers.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [HTTP-кэширование и CDN](../network/caching.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [Оптимизация загрузки](../performance/loading.md)
 
 ## Теория
 
@@ -92,7 +92,7 @@ CSS не блокирует **парсер**, но:
 - `<img data-src>` у ленивых загрузчиков на JS;
 - всё, что рисует клиентский рендеринг: у SPA в HTML пустой `<div id="app">`.
 
-Скрытые ресурсы образуют **водопад** (waterfall): HTML → JS → данные → изображение, каждый шаг — новый RTT. Лечение — сделать ресурс видимым в HTML (`<img src>`, SSR) или подсказать: `<link rel="preload">` для ресурса текущей страницы, `<link rel="preconnect">` для чужого origin, `fetchpriority="high"` для LCP-изображения. Подробно о подсказках — тема «Оптимизация загрузки».
+Скрытые ресурсы образуют **водопад** (waterfall): HTML → JS → данные → изображение, каждый шаг — новый RTT. Лечение — сделать ресурс видимым в HTML (`<img src>`, SSR) или подсказать: `<link rel="preload">` для ресурса текущей страницы, `<link rel="preconnect">` для чужого origin, `fetchpriority="high"` для LCP-изображения. Подробно о подсказках — тема «[Оптимизация загрузки](../performance/loading.md)».
 
 ### Критический путь рендеринга
 
