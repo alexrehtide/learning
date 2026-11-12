@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Кэш вправе отдать сохранённый ответ без сервера, пока тот **свежий**. Срок свежести задаёт `Cache-Control: max-age` (для общих кэшей — `s-maxage`), а без него браузер вычисляет срок эвристикой. Устаревший ответ не выбрасывается, а **валидируется**: условный запрос с `If-None-Match` и ответ `304` без тела. `no-cache` значит «храни, но проверяй каждый раз», а `no-store` — «не храни». Рабочая стратегия: хэш в имени файла плюс год и `immutable` для ассетов, валидация на каждый запрос для HTML. CDN — это общий кэш у пользователя. Его надо научить ключу кэша и уметь сбрасывать.
 
-**Связанные темы:** [HTTP: методы, статусы, заголовки, версии](./http.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Same-origin policy, CORS и cookies](./cors-and-cookies.md)
+**Связанные темы:** [HTTP: методы, статусы, заголовки, версии](./http.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Same-origin policy, CORS и cookies](./cors-and-cookies.md), [Хранилища браузера](./browser-storage.md)
 
 ## Теория
 

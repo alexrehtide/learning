@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** **Same-origin policy** запрещает скрипту *читать* ответы и DOM чужого origin (схема + хост + порт), но не запрещает *отправлять* запросы и встраивать ресурсы. **CORS** — способ, которым сервер ослабляет этот запрет заголовками `Access-Control-*`. Это защита пользователя, а не API: запрос до сервера доходит, браузер лишь не отдаёт ответ скрипту. **Cookies** живут по другим правилам: их граница — хост и путь, без порта, а `SameSite` смотрит на **site**, а не на origin. Отсюда половина ловушек темы.
 
-**Связанные темы:** [HTTP: методы, статусы, заголовки, версии](./http.md), [HTTP-кэширование и CDN](./caching.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Модули: ESM и CommonJS](../javascript/modules.md)
+**Связанные темы:** [HTTP: методы, статусы, заголовки, версии](./http.md), [HTTP-кэширование и CDN](./caching.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Хранилища браузера](./browser-storage.md)
 
 ## Теория
 
