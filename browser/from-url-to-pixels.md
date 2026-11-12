@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Браузер разбирает введённое, находит сервер (DNS), устанавливает соединение (TCP + TLS или QUIC) и получает HTML. HTML разбирается **потоково**: DOM строится по мере прихода байтов. Внешний CSS **блокирует рендеринг**, а через «таблицу стилей, блокирующую скрипты», — и выполнение синхронных скриптов. Синхронный `<script>` **блокирует парсер**. `defer` и `type="module"` выполняются после разбора, но до `DOMContentLoaded`, `async` — когда готов. Preload scanner заранее находит ресурсы в разметке, пока парсер стоит. Быстрая страница — это короткий **критический путь**: мало блокирующих ресурсов, мало байтов, мало сетевых round trip.
 
-**Связанные темы:** [Event loop](../javascript/event-loop.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [Web Workers, Service Workers и PWA](./workers.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md)
+**Связанные темы:** [Event loop](../javascript/event-loop.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [Web Workers, Service Workers и PWA](./workers.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [HTTP-кэширование и CDN](../network/caching.md)
 
 ## Теория
 
@@ -16,7 +16,7 @@ level: ядро
 Классический вопрос «что происходит после ввода URL» проверяет не память, а умение держать в голове **конвейер** и знать, где он стоит. Этапы:
 
 1. **Ввод.** Строка — URL или поисковый запрос? Если URL — дописать схему, применить HSTS (`http:` превращается в `https:` до любого запроса).
-2. **Навигация.** У текущей страницы спрашивают `beforeunload`. Затем проверяются bfcache, [Service Worker](./workers.md#перехват-fetch) (может ответить сам) и HTTP-кэш.
+2. **Навигация.** У текущей страницы спрашивают `beforeunload`. Затем проверяются bfcache, [Service Worker](./workers.md#перехват-fetch) (может ответить сам) и [HTTP-кэш](../network/caching.md).
 3. **Сеть.** DNS → TCP → TLS → HTTP-запрос → ответ. Обзор ниже, подробно — тема [«HTTP: методы, статусы, заголовки, версии»](../network/http.md).
 4. **Решение по ответу.** Редирект (`3xx`) — навигация начинается заново. `Content-Type: text/html` — документ. `Content-Disposition: attachment` или неизвестный тип — загрузка файла.
 5. **Коммит навигации.** Создаётся новый `Document`, старый выгружается (`pagehide`, `unload`) или уходит в bfcache.

@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Воркер — отдельный поток со своим event loop и глобальным объектом, но без DOM. С ним общаются сообщениями: `postMessage` копирует данные через structured clone, а transferable-объекты (`ArrayBuffer`, `MessagePort`, `OffscreenCanvas`) передаёт без копирования. Dedicated Worker принадлежит одной странице, Shared Worker общий для вкладок одного origin. Service Worker — воркер-прокси между страницами своего scope и сетью. Он живёт по событиям (`install`, `activate`, `fetch`), обновляется по жизненному циклу с фазой ожидания и кэширует ответы через Cache API, который HTTP-заголовки не учитывает. PWA — сайт с Web App Manifest, который можно установить, обычно с офлайн-режимом на Service Worker.
 
-**Связанные темы:** [Event loop](../javascript/event-loop.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Модули: ESM и CommonJS](../javascript/modules.md), [От ввода URL до отображения страницы](./from-url-to-pixels.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [События и событийная модель](./events.md)
+**Связанные темы:** [Event loop](../javascript/event-loop.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Модули: ESM и CommonJS](../javascript/modules.md), [От ввода URL до отображения страницы](./from-url-to-pixels.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [События и событийная модель](./events.md), [HTTP-кэширование и CDN](../network/caching.md)
 
 ## Теория
 
@@ -125,7 +125,7 @@ navigator.serviceWorker.register('/sw.js', { scope: '/', type: 'module', updateV
 | Заголовки ответа | учитываются | **игнорируются**: ответ с `no-store` сохраняется и отдаётся (проверено) |
 | Что хранится | GET-ответы | только GET: `put` с `POST` → `TypeError` |
 
-Поиск идёт по URL **с query-строкой** (`?v=2` — другой ключ, `ignoreSearch: true` отключает) и учитывает `Vary`. Удаление старых версий — ваша работа: кэш с хэшированными чанками растёт с каждым деплоем, если в `activate` не удалять чужие кэши. Подробно об HTTP-кэше — в разделе «Сеть».
+Поиск идёт по URL **с query-строкой** (`?v=2` — другой ключ, `ignoreSearch: true` отключает) и учитывает `Vary`. Удаление старых версий — ваша работа: кэш с хэшированными чанками растёт с каждым деплоем, если в `activate` не удалять чужие кэши. Подробно об HTTP-кэше — в теме [HTTP-кэширование и CDN](../network/caching.md).
 
 **Стратегии кэширования:**
 

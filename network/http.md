@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** HTTP — это две разные вещи: **семантика** (методы, статусы, заголовки — RFC 9110, одинаковы во всех версиях) и **передача** (как сообщения едут по сети — HTTP/1.1, HTTP/2, HTTP/3). Свойства методов — **безопасность** и **идемпотентность** — не формальность: на них держатся повторы запросов, prefetch и кэш. Статус говорит клиенту, *что делать дальше*, поэтому спорные пары (301/308, 302/307/303, 401/403) различаются именно поведением клиента. HTTP/2 убрал head-of-line blocking на уровне HTTP, но оставил его в TCP. HTTP/3 переносит потоки в QUIC поверх UDP и убирает его совсем.
 
-**Связанные темы:** [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md), [Web Workers, Service Workers и PWA](../browser/workers.md)
+**Связанные темы:** [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [HTTP-кэширование и CDN](./caching.md)
 
 ## Теория
 
@@ -84,7 +84,7 @@ level: ядро
 
 - **Метаданные представления:** `Content-Type` (с `charset`), `Content-Length`, `Content-Encoding`, `Content-Language`.
 - **Согласование:** `Accept`, `Accept-Language`, `Accept-Encoding` — что клиент готов принять, с весами `q` от 0 до 1. Ответ — `Vary`: какие заголовки запроса повлияли на выбор.
-- **Условные запросы:** `If-None-Match`/`ETag`, `If-Modified-Since`/`Last-Modified`, `If-Match` — подробно в теме о кэшировании.
+- **Условные запросы:** `If-None-Match`/`ETag`, `If-Modified-Since`/`Last-Modified`, `If-Match` — подробно в теме [HTTP-кэширование и CDN](./caching.md#валидация-etag-last-modified-и-304).
 - **Аутентификация:** `Authorization`, `WWW-Authenticate`.
 - **Контекст:** `Host` (в HTTP/2+ — псевдозаголовок `:authority`), `Origin`, `Referer`, `User-Agent` и client hints `Sec-CH-*`.
 
