@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Каждый кадр браузер проходит конвейер: **style** (вычислить стили) → **layout** (размеры и позиции) → **paint** (список команд отрисовки) → **composite** (собрать слои в кадр). Изменение запускает конвейер с того этапа, который оно затрагивает: геометрия — с layout (reflow), цвет — с paint (repaint), `transform` и `opacity` на отдельном слое — только composite, часто без главного потока. Самая частая ошибка производительности — **layout thrashing**: чтение геометрии после записи стилей заставляет браузер сделать layout синхронно, и в цикле это повторяется N раз вместо одного раза за кадр.
 
-**Связанные темы:** [От ввода URL до отображения страницы](./from-url-to-pixels.md), [Event loop](../javascript/event-loop.md), [DOM API и observers](./dom.md), [Core Web Vitals и измерение](../performance/web-vitals.md)
+**Связанные темы:** [От ввода URL до отображения страницы](./from-url-to-pixels.md), [Event loop](../javascript/event-loop.md), [DOM API и observers](./dom.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [Оценка сложности](../algorithms/complexity.md)
 
 ## Теория
 
