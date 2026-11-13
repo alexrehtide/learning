@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Функция — объект с внутренним методом `[[Call]]`, а у конструкторов есть ещё `[[Construct]]`. Виды функций (объявление, выражение, стрелка, метод, класс) различаются набором внутренних слотов: есть ли у функции свой `this`, `arguments`, `prototype` и можно ли вызвать её через `new`. `this` — не переменная. Его значение задаёт **способ вызова**: `new`, `call`/`apply`/`bind`, вызов через свойство объекта, обычный вызов. Стрелка своего `this` не имеет и берёт его из внешней функции.
 
-**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Замыкания](./closures.md), [Прототипы и классы](./prototypes-and-classes.md), [Деструктуризация, spread/rest и современный синтаксис](./modern-syntax.md), [Итераторы и генераторы](./iterators-and-generators.md), [Модули: ESM и CommonJS](./modules.md)
+**Связанные темы:** [Область видимости и hoisting](./scope-and-hoisting.md), [Замыкания](./closures.md), [Прототипы и классы](./prototypes-and-classes.md), [Деструктуризация, spread/rest и современный синтаксис](./modern-syntax.md), [Итераторы и генераторы](./iterators-and-generators.md), [Модули: ESM и CommonJS](./modules.md), [Полифилы: методы `Array`, `bind`/`call`/`apply`](../live-coding/polyfills.md)
 
 ## Теория
 
@@ -358,7 +358,7 @@ function softBind(fn, defaultThis, ...bound) {
 - `softBound` должна быть обычной функцией, а не стрелкой: ей нужен свой `this`, чтобы отличить вызов через свойство от обычного. Модуль — строгий код, поэтому «обычный вызов» даёт `undefined`. Проверка на `globalThis` нужна для хостов, которые передают глобальный объект явно (колбэк `setTimeout` в браузере).
 - `new.target` отличает `new` от вызова. `Reflect.construct(fn, args, new.target)` создаёт объект с прототипом `new.target.prototype`, поэтому `softBound.prototype = fn.prototype` нужен для `instanceof` обеих функций. Так же ведёт себя настоящий `bind` при `new`.
 - Ограничение: если `this` намеренно равен `globalThis` (`greet.call(window)`), его не отличить от вызова «без объекта». Встроенный `bind` такой проблемы не имеет: он не смотрит на `this` вовсе.
-- Реализация `bind`, `call` и `apply` с нуля — в теме о полифилах.
+- Реализация `bind`, `call` и `apply` с нуля и её отличия от нативных — в теме [Полифилы: методы `Array`, `bind`/`call`/`apply`](../live-coding/polyfills.md).
 
 Сложность: O(k) на вызов, где k — число аргументов (копирование в массив).
 :::
