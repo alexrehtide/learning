@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Деструктуризация — шаблон, который раскладывает значение по переменным: объектный шаблон читает свойства, массивный — проходит по протоколу итерации. Значение по умолчанию срабатывает только на `undefined`. Многоточие означает spread там, где значения создаются, и rest там, где они собираются; оба копируют поверхностно. `?.` обрывает всю цепочку на `null`/`undefined`, `??` подставляет значение только для них, а `??=`, `||=` и `&&=` не выполняют запись, если она не нужна. Во Vue деструктуризация копирует значение и рвёт реактивность — кроме props в `<script setup>`, где компилятор переписывает обращения.
 
-**Связанные темы:** [Типы данных и приведение типов](./types-and-coercion.md), [Область видимости и hoisting](./scope-and-hoisting.md), [Функции и `this`](./functions-and-this.md), [Дескрипторы свойств, `Proxy` и `Reflect`](./property-descriptors-and-proxy.md), [Итераторы и генераторы](./iterators-and-generators.md), [Функциональные приёмы и иммутабельность](./functional-programming.md)
+**Связанные темы:** [Типы данных и приведение типов](./types-and-coercion.md), [Область видимости и hoisting](./scope-and-hoisting.md), [Функции и `this`](./functions-and-this.md), [Дескрипторы свойств, `Proxy` и `Reflect`](./property-descriptors-and-proxy.md), [Итераторы и генераторы](./iterators-and-generators.md), [Функциональные приёмы и иммутабельность](./functional-programming.md), [deepClone, deepEqual, get/set по пути](../live-coding/object-utilities.md)
 
 ## Теория
 
@@ -310,7 +310,7 @@ omit(src, ['a']).admin;                    // undefined: the prototype is untouc
 ```
 
 - Для фиксированного списка ключей `omit` пишется одной строкой: `const { password, token, ...safe } = user`. Динамический список шаблоном не выразить, отсюда функция. По семантике она повторяет rest-свойство.
-- `JSON.parse` создаёт `__proto__` как обычное собственное свойство. Наивное `out[key] = obj[key]` на этом ключе вызывает сеттер `Object.prototype.__proto__` и меняет прототип результата: `out.admin` становится `true`. Это и есть prototype pollution в миниатюре. `Object.fromEntries`, `defineProperty` и spread определяют свойство, а не присваивают его.
+- `JSON.parse` создаёт `__proto__` как обычное собственное свойство. Наивное `out[key] = obj[key]` на этом ключе вызывает сеттер `Object.prototype.__proto__` и меняет прототип результата: `out.admin` становится `true`. Это и есть prototype pollution в миниатюре. Полностью, с `set` по пути, `merge` и защитой, он разобран в теме [deepClone, deepEqual, get/set по пути](../live-coding/object-utilities.md). `Object.fromEntries`, `defineProperty` и spread определяют свойство, а не присваивают его.
 - `propertyIsEnumerable` проверяет собственное перечисляемое свойство, поэтому `toString` из прототипа не попадёт в `pick`. `Object.hasOwn` пропустил бы неперечисляемые.
 - `Reflect.ownKeys` даёт и символы, в отличие от `Object.keys`.
 

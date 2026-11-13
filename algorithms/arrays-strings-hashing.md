@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Большинство задач на массивы и строки решаются за один проход одним из четырёх приёмов: хеш-таблица («что я уже видел»), два указателя, скользящее окно и префиксные суммы. Наивный вложенный цикл превращается в O(n). В JavaScript хеш-таблица — это `Map`/`Set`: в отличие от объекта у них нет ключей-прототипов, ключи любого типа и честный порядок вставки. Строка в JS — последовательность UTF-16 code units: `length` и индекс считают не символы, поэтому эмодзи и буквы с диакритикой ломают наивные `split('')`, `reverse` и `slice`.
 
-**Связанные темы:** [Оценка сложности](./complexity.md), [Типы данных и приведение типов](../javascript/types-and-coercion.md), [Итераторы и генераторы](../javascript/iterators-and-generators.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Стеки и очереди](./stacks-and-queues.md)
+**Связанные темы:** [Оценка сложности](./complexity.md), [Типы данных и приведение типов](../javascript/types-and-coercion.md), [Итераторы и генераторы](../javascript/iterators-and-generators.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Стеки и очереди](./stacks-and-queues.md), [deepClone, deepEqual, get/set по пути](../live-coding/object-utilities.md)
 
 ## Теория
 
@@ -59,7 +59,7 @@ for (const w of ['constructor', 'a', 'a']) count[w] = (count[w] || 0) + 1;
 count.constructor; // 'function Object() { [native code] }1'
 ```
 
-`count['constructor']` нашёлся в `Object.prototype`, и `+ 1` склеил функцию со строкой. А `count['__proto__'] = 1` вызывает **сеттер** прототипа: число он игнорирует, и ключ просто не появится. Если ключи приходят от пользователя (`JSON.parse`, query-строка), запись в `obj[key]` по ключу `__proto__` — путь к prototype pollution ([подробнее](../javascript/modern-syntax.md)). `Object.create(null)` лечит обе проблемы: у объекта без прототипа нет ни унаследованных ключей, ни сеттера `__proto__`.
+`count['constructor']` нашёлся в `Object.prototype`, и `+ 1` склеил функцию со строкой. А `count['__proto__'] = 1` вызывает **сеттер** прототипа: число он игнорирует, и ключ просто не появится. Если ключи приходят от пользователя (`JSON.parse`, query-строка), запись в `obj[key]` по ключу `__proto__` — путь к prototype pollution ([подробнее](../live-coding/object-utilities.md)). `Object.create(null)` лечит обе проблемы: у объекта без прототипа нет ни унаследованных ключей, ни сеттера `__proto__`.
 
 **Приведение ключей.** `obj[1]` и `obj['1']` — один ключ, а любой объект становится `'[object Object]'`: два разных объекта-ключа перезапишут друг друга. `Map` различает `1` и `'1'`, а ключом может быть объект или DOM-узел. Сравнение — SameValueZero: `NaN` равен `NaN`, а `+0` и `−0` — один ключ.
 
