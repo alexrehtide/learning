@@ -105,7 +105,7 @@ list.addEventListener('click', (event) => {
 
 - Синтетические события **не запускают действий по умолчанию**: `new KeyboardEvent('keydown', { key: 'a' })` не введёт символ, синтетический `wheel` не прокрутит. Исключение — `click`: `el.click()` и `dispatchEvent` с объектом `MouseEvent` (в том числе `PointerEvent`) запускают activation behavior — чекбокс переключается, ссылка открывается. Простой `new Event('click')` — не запускает.
 - Некоторые API требуют **user activation** (открыть попап, полноэкранный режим, запись в буфер обмена). Синтетический `click()` из таймера её не даёт.
-- `CustomEvent` несёт данные в `detail`. Свои события называют без префикса `on` и в нижнем регистре. Чтобы они были видны предкам, нужен `bubbles: true`, а через shadow DOM — ещё и `composed: true`.
+- `CustomEvent` несёт данные в `detail`. Свои события называют без префикса `on` и в нижнем регистре. Чтобы они были видны предкам, нужен `bubbles: true`, а через shadow DOM — ещё и `composed: true`. `EventTarget` с `CustomEvent` годится и как emitter без DOM-узла: сравнение со своей реализацией — в теме [EventEmitter](../live-coding/event-emitter.md).
 
 ### Shadow DOM
 

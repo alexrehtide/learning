@@ -40,7 +40,7 @@ SPA живёт часами без перезагрузки, поэтому да
 | `setInterval`, рекурсивный `setTimeout`, цикл `requestAnimationFrame` | колбэк | `clearInterval`, флаг остановки, `cancelAnimationFrame` |
 | `ResizeObserver`, `IntersectionObserver`, `MutationObserver` на живых узлах | observer и его колбэк | `disconnect()` |
 | `WebSocket`, `EventSource`, `BroadcastChannel`, `MessagePort` | открытое соединение — корень, держит слушатели | `close()` |
-| Стор, шина событий, `AbortSignal` всей страницы | списки подписчиков | отписка, функция, которую вернул `subscribe` |
+| Стор, [шина событий](../live-coding/event-emitter.md), `AbortSignal` всей страницы | списки подписчиков | отписка, функция, которую вернул `subscribe` |
 | `Map`, массив, объект на уровне модуля | всё, что туда положили | ограничение размера (LRU), TTL, `WeakMap` по объекту |
 | Сторонние библиотеки: карты, графики, редакторы | свой DOM, слушатели, воркеры | `destroy()` / `dispose()` из их API |
 | Консоль | аргументы `console.log` | не логировать объекты в проде |

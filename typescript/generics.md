@@ -254,7 +254,7 @@ const g = d();                // 7
 
 ### 3. Типизированный EventEmitter · средне
 
-Типизируйте шину событий: карта событий задаёт тип payload, `on` и `emit` проверяют имя события и данные, `on` возвращает функцию отписки. Реализация самого `EventEmitter` — в live coding; здесь главное — типы.
+Типизируйте шину событий: карта событий задаёт тип payload, `on` и `emit` проверяют имя события и данные, `on` возвращает функцию отписки. Реализация самого `EventEmitter` — в теме [EventEmitter](../live-coding/event-emitter.md); здесь главное — типы.
 
 ```ts
 type AppEvents = { login: { userId: number }; logout: undefined };
