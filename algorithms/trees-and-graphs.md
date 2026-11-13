@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Граф — вершины и рёбра. Дерево — связный граф без циклов. Во фронтенде графы обычно разреженные, поэтому их хранят списком смежности (`Map` вершина → соседи), а деревья — объектами с `children`. Обход в глубину (DFS) идёт по стеку, явному или стеку вызовов. Обход в ширину (BFS) идёт по очереди и в невзвешенном графе находит кратчайший путь. Оба обхода стоят O(V + E). На DFS построены обнаружение циклов и топологическая сортировка: порядок сборки и выполнение ES-модулей. Рекурсивный обход глубоких данных падает с `RangeError`, поэтому на интервью ждут итеративную версию.
 
-**Связанные темы:** [Оценка сложности](./complexity.md), [Стеки и очереди](./stacks-and-queues.md), [Сортировки и бинарный поиск](./sorting-and-searching.md), [Массивы, строки и хеш-таблицы](./arrays-strings-hashing.md), [DOM API и observers](../browser/dom.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Итераторы и генераторы](../javascript/iterators-and-generators.md), [Память и сборка мусора](../javascript/memory-and-gc.md)
+**Связанные темы:** [Оценка сложности](./complexity.md), [Стеки и очереди](./stacks-and-queues.md), [Сортировки и бинарный поиск](./sorting-and-searching.md), [Массивы, строки и хеш-таблицы](./arrays-strings-hashing.md), [DOM API и observers](../browser/dom.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Итераторы и генераторы](../javascript/iterators-and-generators.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Рекурсия и динамическое программирование](./recursion-and-dp.md)
 
 ## Теория
 

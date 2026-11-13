@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Асимптотическая сложность показывает, как растёт число операций (или объём памяти) при росте входа n. Константы и младшие члены отбрасываются. O — верхняя граница, Ω — нижняя, Θ — точная, а на интервью под «O(n)» обычно имеют в виду именно точную оценку худшего случая. Senior-уровень — это умение видеть скрытую стоимость: `shift`, `includes` в цикле, spread аккумулятора в `reduce`. А ещё — отличать гарантии спецификации от поведения V8 и называть сложность и по времени, и по памяти, включая стек рекурсии.
 
-**Связанные темы:** [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Оптимизация runtime и профилирование](../performance/runtime.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [Массивы, строки и хеш-таблицы](./arrays-strings-hashing.md), [Стеки и очереди](./stacks-and-queues.md)
+**Связанные темы:** [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Оптимизация runtime и профилирование](../performance/runtime.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [Массивы, строки и хеш-таблицы](./arrays-strings-hashing.md), [Стеки и очереди](./stacks-and-queues.md), [Рекурсия и динамическое программирование](./recursion-and-dp.md)
 
 ## Теория
 
