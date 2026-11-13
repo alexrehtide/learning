@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Событие диспатчится (dispatch) по **пути**, который вычисляется заранее: от `window` вниз к цели (capture), на самой цели (target), обратно вверх (bubble, если `bubbles: true`). На каждом узле вызываются слушатели этого узла — клон списка на момент входа. `stopPropagation` останавливает путь, но не остальные слушатели текущего узла; `stopImmediatePropagation` — и их. `preventDefault` отменяет действие по умолчанию, если событие `cancelable` и слушатель не `passive`. На всплытии держится делегирование: один слушатель на предке вместо тысячи на элементах. `dispatchEvent` синхронный, и синтетические события, кроме `click`, не запускают действий браузера.
 
-**Связанные темы:** [DOM API и observers](./dom.md), [Event loop](../javascript/event-loop.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md), [Память и сборка мусора](../javascript/memory-and-gc.md)
+**Связанные темы:** [DOM API и observers](./dom.md), [Event loop](../javascript/event-loop.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md)
 
 ## Теория
 

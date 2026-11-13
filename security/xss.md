@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** **XSS** (cross-site scripting, межсайтовый скриптинг) — выполнение чужого скрипта в origin вашей страницы. Скрипт получает всё, что есть у страницы: DOM, токены в хранилищах, право слать запросы от имени пользователя. Защита — не «фильтр плохих строк», а правило: данные попадают в документ только через API, которые понимают контекст (`textContent`, `setAttribute`, экранирование под HTML, атрибут, URL). Vue делает это сам для <code v-pre>{{ }}</code> и `:attr`, но не проверяет URL, не защищает `v-html`, `v-bind="obj"` и шаблоны, собранные из ввода. Последние рубежи — санитайзинг, Trusted Types, CSP и `HttpOnly`.
 
-**Связанные темы:** [DOM API и observers](../browser/dom.md), [Same-origin policy, CORS и cookies](../network/cors-and-cookies.md), [Хранилища браузера](../network/browser-storage.md), [Content Security Policy](./csp.md), [Аутентификация на фронтенде](./authentication.md)
+**Связанные темы:** [DOM API и observers](../browser/dom.md), [Same-origin policy, CORS и cookies](../network/cors-and-cookies.md), [Хранилища браузера](../network/browser-storage.md), [Content Security Policy](./csp.md), [Аутентификация на фронтенде](./authentication.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md)
 
 ## Теория
 
