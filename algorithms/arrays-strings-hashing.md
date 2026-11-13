@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Большинство задач на массивы и строки решаются за один проход одним из четырёх приёмов: хеш-таблица («что я уже видел»), два указателя, скользящее окно и префиксные суммы. Наивный вложенный цикл превращается в O(n). В JavaScript хеш-таблица — это `Map`/`Set`: в отличие от объекта у них нет ключей-прототипов, ключи любого типа и честный порядок вставки. Строка в JS — последовательность UTF-16 code units: `length` и индекс считают не символы, поэтому эмодзи и буквы с диакритикой ломают наивные `split('')`, `reverse` и `slice`.
 
-**Связанные темы:** [Оценка сложности](./complexity.md), [Типы данных и приведение типов](../javascript/types-and-coercion.md), [Итераторы и генераторы](../javascript/iterators-and-generators.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Память и сборка мусора](../javascript/memory-and-gc.md)
+**Связанные темы:** [Оценка сложности](./complexity.md), [Типы данных и приведение типов](../javascript/types-and-coercion.md), [Итераторы и генераторы](../javascript/iterators-and-generators.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Стеки и очереди](./stacks-and-queues.md)
 
 ## Теория
 
