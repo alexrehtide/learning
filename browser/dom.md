@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** DOM — дерево **узлов** (элементы, текст, комментарии, фрагменты), а не HTML-строка: атрибуты из разметки и свойства объектов — разные вещи, связанные отражением (reflection). Сам вызов DOM API дешёвый. Дорого то, что он запускает: пересчёт стилей и layout, разбор HTML, потерю состояния узлов при перемещении. Поэтому изменения группируют (`DocumentFragment`, `append(...nodes)`, `replaceChildren`) и не читают геометрию между записями. За DOM следят тремя наблюдателями, и у каждого своё место в event loop: `MutationObserver` — микрозадача после изменения, `ResizeObserver` — внутри кадра после layout и до paint, `IntersectionObserver` — расчёт в кадре, колбэк отдельной задачей.
 
-**Связанные темы:** [От ввода URL до отображения страницы](./from-url-to-pixels.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [Event loop](../javascript/event-loop.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [События и событийная модель](./events.md), [XSS и безопасный вывод во Vue](../security/xss.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md)
+**Связанные темы:** [От ввода URL до отображения страницы](./from-url-to-pixels.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [Event loop](../javascript/event-loop.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [События и событийная модель](./events.md), [XSS и безопасный вывод во Vue](../security/xss.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md), [UI-coding: автокомплит, таблица, дерево](../live-coding/ui-widgets.md)
 
 ## Теория
 

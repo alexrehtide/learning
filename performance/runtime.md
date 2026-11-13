@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Пока выполняется задача, браузер не обработает ввод и не нарисует кадр. Поэтому в runtime оптимизируют не «скорость кода» вообще, а **длину задач** на главном потоке. Задачу дольше 50 мс разбивают на куски и между ними отдают управление (yield): `scheduler.yield()` с запасным `setTimeout`, `scheduler.postTask()` с приоритетами, `requestIdleCallback` для фона. В обработчике ввода сначала делают визуальный отклик, а остальное переносят за кадр. Рендерят меньше (виртуализация, `content-visibility`), тяжёлые вычисления уносят в воркер. Искать проблему нужно в DevTools Performance с замедлением CPU, по flame chart и Bottom-Up, а свои участки размечать через User Timing.
 
-**Связанные темы:** [Event loop](../javascript/event-loop.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Core Web Vitals и измерение](./web-vitals.md), [Оптимизация загрузки](./loading.md)
+**Связанные темы:** [Event loop](../javascript/event-loop.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Core Web Vitals и измерение](./web-vitals.md), [Оптимизация загрузки](./loading.md), [UI-coding: автокомплит, таблица, дерево](../live-coding/ui-widgets.md)
 
 ## Теория
 

@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Во Vue единица обновления — компонент. Изменение состояния перезапускает рендер тех компонентов, которые его читали, а дальше компилятор сужает сравнение до динамических узлов (patch flags, block tree). Работы становится меньше, когда меньше компонентов перерисовывается (стабильные props, стабильные значения `computed`, `v-memo`) и когда реактивности меньше (`shallowRef`, `markRaw`). В Nuxt главная стоимость — загрузка и гидрация. Её снижают маленьким payload (`pick`/`transform`), ленивыми компонентами, отложенной гидрацией (`hydrate-on-*`) и server components.
 
-**Связанные темы:** [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Core Web Vitals и измерение](./web-vitals.md), [Оптимизация загрузки](./loading.md), [Оптимизация runtime и профилирование](./runtime.md), [Утечки памяти](./memory-leaks.md), [HTTP-кэширование и CDN](../network/caching.md)
+**Связанные темы:** [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Core Web Vitals и измерение](./web-vitals.md), [Оптимизация загрузки](./loading.md), [Оптимизация runtime и профилирование](./runtime.md), [Утечки памяти](./memory-leaks.md), [HTTP-кэширование и CDN](../network/caching.md), [UI-coding: автокомплит, таблица, дерево](../live-coding/ui-widgets.md)
 
 ## Теория
 

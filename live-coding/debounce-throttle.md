@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Обе утилиты прореживают частые вызовы функции. **Debounce** откладывает вызов, пока поток вызовов не затихнет на `wait` мс: подходит, когда важен только итог, например поиск по вводу. **Throttle** вызывает функцию не чаще раза в `wait` мс, пока вызовы продолжаются: подходит для промежуточных состояний — прокрутки, перетаскивания, resize. Обе написаны на замыкании и таймере. На интервью проверяют контракт: `this` и аргументы, `leading`/`trailing`, `maxWait`, `cancel`/`flush`, что возвращает обёртка и как обойтись с асинхронной функцией.
 
-**Связанные темы:** [Замыкания](../javascript/closures.md), [Функции и `this`](../javascript/functions-and-this.md), [Event loop](../javascript/event-loop.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Оптимизация runtime и профилирование](../performance/runtime.md), [Производительность Vue и Nuxt](../performance/vue-performance.md)
+**Связанные темы:** [Замыкания](../javascript/closures.md), [Функции и `this`](../javascript/functions-and-this.md), [Event loop](../javascript/event-loop.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Оптимизация runtime и профилирование](../performance/runtime.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [UI-coding: автокомплит, таблица, дерево](./ui-widgets.md)
 
 ## Теория
 
