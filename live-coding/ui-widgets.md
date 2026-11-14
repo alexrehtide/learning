@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Это компоненты, которые работают с данными, поэтому основная сложность в них не в разметке, а в состоянии. Автокомплит проверяет асинхронность: debounce, отмену устаревших запросов, гонку ответов, кэш, а также паттерн combobox, где фокус остаётся в поле и активную опцию указывает `aria-activedescendant`. Таблица проверяет производные данные: цепочку `computed` «фильтр → сортировка → страница», стабильную сортировку по локали и `aria-sort`. Дерево проверяет рекурсию: компонент, который рендерит сам себя, ленивую загрузку детей, состояние раскрытия отдельно от данных и клавиатуру tree view. Для больших деревьев его превращают в плоский список.
 
-**Связанные темы:** [UI-coding: базовые компоненты на Vue](./ui-components.md), [debounce и throttle](./debounce-throttle.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md), [Сортировки и бинарный поиск](../algorithms/sorting-and-searching.md), [Деревья и графы](../algorithms/trees-and-graphs.md), [Оптимизация runtime и профилирование](../performance/runtime.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [XSS и безопасный вывод во Vue](../security/xss.md)
+**Связанные темы:** [UI-coding: базовые компоненты на Vue](./ui-components.md), [debounce и throttle](./debounce-throttle.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md), [Сортировки и бинарный поиск](../algorithms/sorting-and-searching.md), [Деревья и графы](../algorithms/trees-and-graphs.md), [Оптимизация runtime и профилирование](../performance/runtime.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [XSS и безопасный вывод во Vue](../security/xss.md), [Разбор: автокомплит](../architecture/case-autocomplete.md)
 
 ## Теория
 
