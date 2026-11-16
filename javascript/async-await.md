@@ -120,7 +120,7 @@ controller.abort(); // the fetch promise rejects with signal.reason
 
 ### Vue: очистка в `watch`
 
-Колбэк `watch` и функция `watchEffect` могут зарегистрировать очистку. Vue вызывает её перед следующим запуском и при остановке наблюдателя, в том числе при размонтировании компонента (в исходниках 3.5.45 очистка — это `effect.onStop`). Самый удобный способ — `onWatcherCleanup` из Vue 3.5. До 3.5 — третий аргумент колбэка `watch` (`onCleanup`) или первый аргумент `watchEffect`.
+Колбэк `watch` и функция `watchEffect` могут зарегистрировать очистку. Vue вызывает её перед следующим запуском и при остановке наблюдателя, в том числе при размонтировании компонента (в исходниках 3.5.45 очистка — это `effect.onStop`). Самый удобный способ — `onWatcherCleanup` из Vue 3.5. До 3.5 — третий аргумент колбэка `watch` (`onCleanup`) или первый аргумент `watchEffect`. Подробно — в теме [«`watch` и `watchEffect`»](../vue/watchers.md#очистка-и-гонки).
 
 ```js
 import { watch, onWatcherCleanup } from 'vue';
