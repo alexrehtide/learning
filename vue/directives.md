@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Встроенная директива — подсказка компилятору. `v-if` становится тернарным оператором с отдельным блоком, `v-for` — вызовом `renderList` с фрагментом, `v-html` — свойством `innerHTML`. Только `v-show`, `v-model` и пользовательские директивы доходят до рантайма как объекты с хуками и вызываются через `withDirectives`. Пользовательская директива — это хуки жизненного цикла **элемента** для низкоуровневой работы с DOM. Логику с состоянием выносят в composable, а разметку — в компонент.
 
-**Связанные темы:** [Компоненты и шаблоны](./components-and-templates.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [XSS и безопасный вывод во Vue](../security/xss.md), [События](../browser/events.md), [Утечки памяти](../performance/memory-leaks.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md)
+**Связанные темы:** [Компоненты и шаблоны](./components-and-templates.md), [Жизненный цикл](./lifecycle.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [XSS и безопасный вывод во Vue](../security/xss.md), [События](../browser/events.md), [Утечки памяти](../performance/memory-leaks.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md)
 
 ## Теория
 
@@ -199,7 +199,7 @@ export const vColor = (el, { value, oldValue, arg = 'color' }) => {
 :::
 
 ::: details Какие хуки есть у пользовательской директивы и когда вызывается updated
-Хуки повторяют жизненный цикл компонента, но относятся к элементу: `created`, `beforeMount`, `mounted`, `beforeUpdate`, `updated`, `beforeUnmount`, `unmounted`. Работа с DOM, которому нужен документ (фокус, размеры, observers), — в `mounted`. Очистка — в `unmounted`. `beforeUpdate`/`updated` вызываются при каждом перерендере компонента-владельца, даже если значение директивы не изменилось. Поэтому сравнивают `binding.value` и `binding.oldValue`, который есть только в этих двух хуках. `binding` — только для чтения, состояние между хуками хранят на `el` или в `WeakMap`. Короткая форма-функция означает `mounted` + `updated`.
+Хуки повторяют [жизненный цикл компонента](./lifecycle.md), но относятся к элементу: `created`, `beforeMount`, `mounted`, `beforeUpdate`, `updated`, `beforeUnmount`, `unmounted`. Работа с DOM, которому нужен документ (фокус, размеры, observers), — в `mounted`. Очистка — в `unmounted`. `beforeUpdate`/`updated` вызываются при каждом перерендере компонента-владельца, даже если значение директивы не изменилось. Поэтому сравнивают `binding.value` и `binding.oldValue`, который есть только в этих двух хуках. `binding` — только для чтения, состояние между хуками хранят на `el` или в `WeakMap`. Короткая форма-функция означает `mounted` + `updated`.
 :::
 
 ::: details Что происходит с директивой на компоненте

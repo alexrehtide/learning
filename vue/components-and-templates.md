@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Компонент Vue — это объект опций с render-функцией. SFC (`.vue`-файл) — его исходник: на этапе сборки `@vue/compiler-sfc` превращает `<template>` в render-функцию, а `<script setup>` — в функцию `setup()`. В production шаблон встраивается прямо в замыкание `setup`, поэтому он обращается к локальным переменным без прокси, а снаружи компонент по умолчанию закрыт: родитель через ref видит только то, что открыто через `defineExpose`. Composition API группирует логику по смыслу, хорошо типизируется и переиспользуется через composables вместо mixins. Options API построен поверх него и уместен для простых компонентов и legacy-кода.
 
-**Связанные темы:** [Функции и `this`](../javascript/functions-and-this.md), [Замыкания](../javascript/closures.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [XSS и безопасный вывод во Vue](../security/xss.md), [Content Security Policy](../security/csp.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md)
+**Связанные темы:** [Функции и `this`](../javascript/functions-and-this.md), [Замыкания](../javascript/closures.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [Жизненный цикл](./lifecycle.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [XSS и безопасный вывод во Vue](../security/xss.md), [Content Security Policy](../security/csp.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md)
 
 ## Теория
 
@@ -109,7 +109,7 @@ Patch flags, блоки и кэширование подробно разобр�
 
 ### Три способа написать логику
 
-**Options API.** Логика раскладывается по опциям `data`, `computed`, `methods`, `watch` и хукам жизненного цикла. Все они работают через `this`: это прокси экземпляра (`publicThis`), а методы Vue связывает с ним через `bind` ([почему методы нельзя писать стрелками](../javascript/functions-and-this.md)). Шаблон и `this` ищут ключ по очереди: в том, что вернул `setup()`, в `data`, в `props`, в остальных опциях (methods, computed), а в конце в `app.config.globalProperties`.
+**Options API.** Логика раскладывается по опциям `data`, `computed`, `methods`, `watch` и [хукам жизненного цикла](./lifecycle.md). Все они работают через `this`: это прокси экземпляра (`publicThis`), а методы Vue связывает с ним через `bind` ([почему методы нельзя писать стрелками](../javascript/functions-and-this.md)). Шаблон и `this` ищут ключ по очереди: в том, что вернул `setup()`, в `data`, в `props`, в остальных опциях (methods, computed), а в конце в `app.config.globalProperties`.
 
 **`setup()`.** Функция вызывается один раз при создании экземпляра, **раньше** обработки опций, с аргументами `(props, { attrs, slots, emit, expose })`. `this` внутри — `undefined`: экземпляр ещё не готов, состояние живёт в локальных переменных, функции видят его через замыкание. Если `setup` вернёт объект, его поля пройдут через `proxyRefs` и станут видны шаблону и Options API без `.value`. Если вернёт render-функцию, состояние останется закрытым внутри замыкания.
 
