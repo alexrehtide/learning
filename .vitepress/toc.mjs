@@ -177,6 +177,7 @@ export const sections = [
     topics: [
       { file: 'principles-and-patterns', title: 'Принципы и паттерны проектирования' },
       { file: 'robert-martin-principles', title: 'Принципы Роберта Мартина во фронтенде' },
+      { file: 'gof-patterns', title: 'Паттерны «банды четырёх» во фронтенде' },
       { file: 'large-project-structure', title: 'Структура большого проекта и Feature-Sliced Design' },
       { file: 'design-systems', title: 'Design system и UI-kit' },
       { file: 'scaling-frontend', title: 'Масштабирование фронтенда: монорепозитории, микрофронтенды, Nuxt Layers' },
