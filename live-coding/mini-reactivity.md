@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Реактивность в стиле Vue — это `Proxy`, у которого `get` записывает «кто меня прочитал» (`track`), а `set` перезапускает этих читателей (`trigger`). Читатель — эффект: функция, которая на время выполнения становится текущим подписчиком. Подписки хранятся в `WeakMap<target, Map<key, Set<effect>>>`. Поверх эффекта строятся ленивый `computed` с флагом dirty, `ref` и `watch`, а пакетирование даёт планировщик на микрозадаче. На интервью базовую версию пишут за 15 минут, а потом спрашивают про вложенные эффекты, условные ветки, бесконечные циклы и про то, чем настоящая Vue 3.5 отличается от учебной.
 
-**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Event loop](../javascript/event-loop.md), [Замыкания](../javascript/closures.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [Утечки памяти](../performance/memory-leaks.md), [Стеки и очереди](../algorithms/stacks-and-queues.md), [EventEmitter](./event-emitter.md), [curry, compose, memoize, once](./function-utilities.md), [deepClone, deepEqual, get/set по пути](./object-utilities.md)
+**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Как устроена реактивность](../vue/reactivity-internals.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Event loop](../javascript/event-loop.md), [Замыкания](../javascript/closures.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [Утечки памяти](../performance/memory-leaks.md), [Стеки и очереди](../algorithms/stacks-and-queues.md), [EventEmitter](./event-emitter.md), [curry, compose, memoize, once](./function-utilities.md), [deepClone, deepEqual, get/set по пути](./object-utilities.md)
 
 ## Теория
 
@@ -75,7 +75,7 @@ level: ядро
 - **`globalVersion`.** Любая запись увеличивает глобальный счётчик. Если он не менялся с прошлого вычисления, `computed` отдаёт кэш без проверки зависимостей.
 - **Ленивые подписки `computed`.** `computed` подписывается на свои зависимости, только когда у него появляется подписчик, и отписывается, когда подписчиков не осталось. Поэтому непрочитанный `computed` собирается GC, в том числе на SSR.
 - **Массивы и коллекции.** Методы массивов инструментированы: `map`, `filter`, `reduce`, итератор трекают один ключ `ARRAY_ITERATE_KEY` вместо каждого индекса. Для `Map`/`Set` отдельные обработчики вызывают методы на сырой коллекции, у `Map.keys()` свой `MAP_KEY_ITERATE_KEY`.
-- **Итог** PR #10397: −56 % памяти на тесте «1000 ref + 2000 computed + 1000 effect».
+- **Итог** PR #10397: −56 % памяти на тесте «1000 ref + 2000 computed + 1000 effect». Структуры, батчинг и планировщик подробно — в теме [«Как устроена реактивность»](../vue/reactivity-internals.md).
 
 > [!NOTE]
 > Во Vue 3.6 (RC, `3.6.0-rc.15`, сверено 2026-11-13): ядро `@vue/reactivity` переписано портом alien-signals (PR #12349). Единый узел `ReactiveNode` с `deps`/`subs` остаётся на двусвязных списках, меняется алгоритм: при записи `propagate()` помечает подписчиков `Pending` (push), при чтении `checkDirty()` проверяет, изменилось ли что-то на самом деле (pull). Публичный API не меняется.
