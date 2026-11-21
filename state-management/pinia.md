@@ -43,24 +43,7 @@ level: ядро
 
 ### Options store и setup store
 
-```js
-// Options store: state is a factory, getters and actions are objects.
-export const useCounter = defineStore('counter', {
-  state: () => ({ count: 0 }),
-  getters: { double: (state) => state.count * 2 },
-  actions: { inc() { this.count++ } },
-})
-
-// Setup store: a composable whose result Pinia sorts into state/getters/actions.
-export const useCounter = defineStore('counter', () => {
-  const count = ref(0)
-  const double = computed(() => count.value * 2)
-  function inc() { count.value++ }
-  return { count, double, inc }
-})
-```
-
-Options store — сахар над setup store. `createOptionsStore` собирает setup-функцию: вызывает `state()` (если в `pinia.state` ещё нет данных под этим id), берёт `toRefs(pinia.state.value[id])`, оборачивает каждый getter в `computed`, который вызывает его с `this = store`, и передаёт всё в тот же `createSetupStore`.
+Options store описывают объектом `{ state, getters, actions }`, setup store — функцией, которая, как composable, возвращает refs, `computed` и функции (примеры обоих — ниже и в задачах). Options store — сахар над setup store. `createOptionsStore` собирает setup-функцию: вызывает `state()` (если в `pinia.state` ещё нет данных под этим id), берёт `toRefs(pinia.state.value[id])`, оборачивает каждый getter в `computed`, который вызывает его с `this = store`, и передаёт всё в тот же `createSetupStore`.
 
 | | Options store | Setup store |
 | --- | --- | --- |
@@ -152,17 +135,6 @@ const unsubscribe = store.$onAction(({ name, args, after, onError }) => {
 ### Сторы, использующие друг друга
 
 Другой стор вызывают в начале setup или прямо в getter и action. Циклы разрешены, пока ни один из сторов не **читает** state другого во время своего setup. Чтение в `computed` или action безопасно: к моменту вызова оба стора достроены (проверено). Чтение в setup получает недостроенный стор без state: `undefined`, без ошибки (задача 4).
-
-### Pinia и Vuex
-
-Pinia — официальная рекомендация, Vuex 3/4 поддерживаются без новых функций. Что убрали:
-
-- мутации — только actions, в том числе асинхронные;
-- вложенные модули и namespacing — сторы плоские, namespace — это id;
-- «magic strings» (`commit('cart/ADD')`) — стор импортируют и вызывают, типы выводятся без обёрток;
-- регистрацию модулей — стор создаётся при первом использовании, а бандлер выбрасывает неиспользуемые.
-
-Для Options API остались `mapStores`, `mapState`, `mapWritableState`, `mapActions`. Почему не просто `export const state = reactive({})`: на сервере такой модуль общий для всех запросов, и к тому же нет devtools, плагинов и тестовых утилит.
 
 ## Примеры
 
@@ -270,7 +242,7 @@ Getter options store — `computed`, который вызывает функц�
 :::
 
 ::: details Чем Pinia отличается от Vuex и почему не хватает reactive в модуле
-Нет мутаций, только actions, в том числе асинхронные. Нет вложенных модулей и namespacing: сторы плоские и связываются импортом. Нет строковых ключей, типы выводятся. Сторы создаются лениво, бандлер выбрасывает неиспользуемые. `export const state = reactive({})` в модуле работает на клиенте, но на сервере модуль один на процесс, и состояние утекает между запросами. Pinia держит сторы в экземпляре, созданном на приложение, и даёт devtools, плагины, `$subscribe` и SSR-сериализацию.
+Pinia — официальная рекомендация, Vuex 3/4 поддерживаются без новых функций. Нет мутаций, только actions, в том числе асинхронные. Нет вложенных модулей и namespacing: сторы плоские и связываются импортом. Нет строковых ключей, типы выводятся. Сторы создаются лениво, бандлер выбрасывает неиспользуемые. Для Options API остались `mapStores`, `mapState`, `mapActions`. `export const state = reactive({})` в модуле работает на клиенте, но на сервере модуль один на процесс, и состояние утекает между запросами. Pinia держит сторы в экземпляре, созданном на приложение, и даёт devtools, плагины, `$subscribe` и SSR-сериализацию.
 :::
 
 ## Задачи
@@ -457,10 +429,7 @@ export function defineMiniStore(id, setup) {
 
 Проверено через `renderToString`: два «запроса» со своими pinia дали `alice:1/2` и `bob:2/4`, а `pinia.state.value` у каждого — свой `{ counter: { n } }`. После `$dispose()` watcher стора перестал срабатывать, а следующий `useStore()` вернул новый объект.
 
-- `markRaw` нужен, чтобы pinia, попав в реактивный объект, не стала прокси.
-- `effectScope(true)` у pinia и вложенный scope у стора — это то, что отвязывает эффекты стора от компонента, который первым его вызвал.
-- Регистрация в `_s` до setup повторяет поведение Pinia в циклах (задача 4).
-- `!value.effect` отличает `computed` от `ref`. Это та же проверка, что `isComputed` в исходниках.
+`markRaw` не даёт pinia стать прокси внутри реактивных объектов. `effectScope(true)` у pinia и вложенный scope у стора отвязывают эффекты стора от компонента, который первым его вызвал. Регистрация в `_s` до setup повторяет поведение Pinia в циклах (задача 4). `!value.effect` отличает `computed` от `ref`, как `isComputed` в исходниках.
 
 Чего нет по сравнению с Pinia: setup не выполняется в `app.runWithContext`, поэтому `inject()` внутри стора не работает. Нет `$patch`, `$subscribe`, `$onAction`, гидратации из существующего `pinia.state` и плагинов. Гидратацию добавляют одной проверкой: если `pinia.state.value[id]` уже есть, присвоить его значения в возвращённые ref.
 
