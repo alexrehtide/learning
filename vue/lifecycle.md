@@ -121,7 +121,7 @@ onMounted(() => console.log(box.value))
 
 ### Остальные хуки
 
-- **`onErrorCaptured(err, instance, info)`** ловит ошибки потомков, но не свои. Хуки вызываются снизу вверх по цепочке родителей, ошибка затем уходит в `app.config.errorHandler`; `return false` останавливает всплытие. `info` в dev — строка вида `'mounted hook'`. Подробно — в теме «Плагины и обработка ошибок».
+- **`onErrorCaptured(err, instance, info)`** ловит ошибки потомков, но не свои. Хуки вызываются снизу вверх по цепочке родителей, ошибка затем уходит в `app.config.errorHandler`; `return false` останавливает всплытие. `info` в dev — строка вида `'mounted hook'`. Подробно — в теме [«Плагины и обработка ошибок»](./plugins-and-error-handling.md).
 - **`onActivated` / `onDeactivated`** — для компонентов под `<KeepAlive>`: при переключении компонент не размонтируется, а деактивируется. Проверено: `mounted → activated → deactivated → activated → deactivated → unmounted`, то есть `activated` срабатывает и при первом монтировании. Подробно — в теме [«`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты»](./built-in-components.md).
 - **`onRenderTracked` / `onRenderTriggered`** — отладка: какие зависимости прочитал рендер и какая из них его перезапустила. Событие содержит `target`, `type` (`get`, `set`, `add`…), `key`, для `trigger` — `oldValue`/`newValue`. Работают только в dev и не на сервере: в prod-сборке колбэк не вызывается.
 
