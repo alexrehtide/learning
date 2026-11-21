@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Pinia — тонкий слой над реактивностью Vue. `createPinia()` создаёт отвязанный effect scope, `ref({})` под состояние всех сторов и `Map` экземпляров, а `app.use(pinia)` отдаёт pinia через `app.provide`. `defineStore` ничего не создаёт: он возвращает функцию `useStore`, которая при первом вызове находит pinia (через `inject` или глобальную `activePinia`) и выполняет setup внутри своего effect scope. Стор — это `reactive`-объект: state — его `ref`, getters — `computed`, actions — функции в обёртке для `$onAction`. Отсюда все правила: деструктуризация теряет реактивность, getter с аргументом не кэшируется, внутренний вызов action в setup store не виден подписчикам, а `$reset` есть только у options store.
 
-**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Как устроена реактивность](../vue/reactivity-internals.md), [`watch` и `watchEffect`](../vue/watchers.md), [Composables](../vue/composables.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md), [Плагины и обработка ошибок](../vue/plugins-and-error-handling.md), [TypeScript во Vue](../vue/typescript.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Данные и сеть](../architecture/data-and-network.md), [Утечки памяти](../performance/memory-leaks.md)
+**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Как устроена реактивность](../vue/reactivity-internals.md), [`watch` и `watchEffect`](../vue/watchers.md), [Composables](../vue/composables.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md), [Плагины и обработка ошибок](../vue/plugins-and-error-handling.md), [TypeScript во Vue](../vue/typescript.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Данные и сеть](../architecture/data-and-network.md), [Утечки памяти](../performance/memory-leaks.md), [Pinia: плагины, SSR и тестирование](./pinia-advanced.md)
 
 ## Теория
 
@@ -39,7 +39,7 @@ level: ядро
 2. Setup выполняется внутри `app.runWithContext` → `pinia._e.run` → собственного `effectScope()` стора. `runWithContext` даёт работать `inject()` в setup store, а scope собирает `watch`, `computed` и `onScopeDispose`. Эффекты стора принадлежат pinia, а не компоненту, который первым вызвал `useStore`. Поэтому они не останавливаются при его размонтировании.
 3. Возвращённые значения сортируются: `ref` (но не `computed`) или `reactive` — **state**, их кладут в `pinia.state.value[id]`; `computed` — **getter**; функция — **action**, её оборачивают; остальное копируется как есть.
 4. Всё копируется в `store`. Стор — `reactive`, поэтому `store.count` разворачивает ref: это число, а не `Ref`.
-5. Вызываются плагины, добавленные через `pinia.use` (о них — в следующей теме раздела).
+5. Вызываются плагины, добавленные через `pinia.use` (о них — в теме [«Pinia: плагины, SSR и тестирование»](./pinia-advanced.md)).
 
 ### Options store и setup store
 
@@ -65,7 +65,7 @@ Options store описывают объектом `{ state, getters, actions }`,
 
 `state` — функция: каждая pinia (каждый SSR-запрос) получает свой объект. Все поля объявляют сразу, хотя бы как `null`: поле, добавленное после создания (`store.extra = 1`), не попадает в `$state` (проверено) и не сериализуется. Мутаций, как во Vuex, нет: state меняют прямо (`store.count++`), через `$patch` или в action.
 
-`store.$state = { name: 'z' }` не заменяет объект состояния. Сеттер `$state` вызывает `$patch(s => Object.assign(s, value))`: указанные поля перезаписываются, остальные остаются (проверено: `items` сохранился, а объект `$state` тот же). Целиком состояние приложения задаётся через `pinia.state.value = …`. Так устроена гидратация, она — в следующей теме.
+`store.$state = { name: 'z' }` не заменяет объект состояния. Сеттер `$state` вызывает `$patch(s => Object.assign(s, value))`: указанные поля перезаписываются, остальные остаются (проверено: `items` сохранился, а объект `$state` тот же). Целиком состояние приложения задаётся через `pinia.state.value = …`. Так устроена гидратация, она разобрана в теме [«Pinia: плагины, SSR и тестирование»](./pinia-advanced.md).
 
 ### Getters
 
