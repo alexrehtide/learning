@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Во Vue единица обновления — компонент. Изменение состояния перезапускает рендер тех компонентов, которые его читали, а дальше компилятор сужает сравнение до динамических узлов (patch flags, block tree). Работы становится меньше, когда меньше компонентов перерисовывается (стабильные props, стабильные значения `computed`, `v-memo`) и когда реактивности меньше (`shallowRef`, `markRaw`). В Nuxt главная стоимость — загрузка и гидрация. Её снижают маленьким payload (`pick`/`transform`), ленивыми компонентами, отложенной гидрацией (`hydrate-on-*`) и server components.
 
-**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Core Web Vitals и измерение](./web-vitals.md), [Оптимизация загрузки](./loading.md), [Оптимизация runtime и профилирование](./runtime.md), [Утечки памяти](./memory-leaks.md), [HTTP-кэширование и CDN](../network/caching.md), [UI-coding: автокомплит, таблица, дерево](../live-coding/ui-widgets.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md)
+**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Core Web Vitals и измерение](./web-vitals.md), [Оптимизация загрузки](./loading.md), [Оптимизация runtime и профилирование](./runtime.md), [Утечки памяти](./memory-leaks.md), [HTTP-кэширование и CDN](../network/caching.md), [UI-coding: автокомплит, таблица, дерево](../live-coding/ui-widgets.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](../vue/built-in-components.md)
 
 ## Теория
 
@@ -111,6 +111,7 @@ const parity = computed((old) => {
 > Лишние абстракции тоже стоят денег. Экземпляр компонента дороже узла DOM. Гайд Vue советует не дробить на компоненты элементы большого списка без необходимости: 100 строк по 3 вложенных компонента — это 300 экземпляров с effect, props и слотами.
 
 ### `KeepAlive`, асинхронные компоненты и ленивая гидрация
+Механика каждого компонента — в теме [«`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты»](../vue/built-in-components.md).
 
 - **`<KeepAlive>`** не размонтирует скрытый компонент, а переносит его DOM в отсоединённый контейнер. Возврат на вкладку дешёвый: нет `setup`, нет запросов, сохранено состояние. Цена — память. Проп `max` включает LRU-вытеснение, `include`/`exclude` ограничивают круг компонентов. Хуки — `onActivated`/`onDeactivated`: там ставят на паузу таймеры и подписки.
 - **`defineAsyncComponent(() => import('./Chart.vue'))`** выносит компонент в отдельный чанк, который грузится при первом рендере. Опции `loadingComponent`, `errorComponent`, `delay`, `timeout`.

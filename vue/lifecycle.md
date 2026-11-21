@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Хук жизненного цикла — функция, которую `setup()` кладёт в массив на текущем экземпляре компонента, а рендерер вызывает в нужный момент. `before*`-хуки вызываются синхронно, до работы с DOM. `mounted`, `updated` и `unmounted` ставятся в post-очередь планировщика, поэтому дети завершают монтирование раньше родителя. Регистрация привязана к «текущему экземпляру», который существует только во время синхронного выполнения `setup()`. Поэтому хук в `setTimeout` или после `await` в обычном `async setup()` теряется, а в `<script setup>` компилятор восстанавливает экземпляр после `await`. На сервере хуки монтирования не вызываются вовсе.
 
-**Связанные темы:** [Компоненты и шаблоны](./components-and-templates.md), [Директивы](./directives.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [`watch` и `watchEffect`](./watchers.md), [Event loop](../javascript/event-loop.md), [Утечки памяти](../performance/memory-leaks.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Composables](./composables.md)
+**Связанные темы:** [Компоненты и шаблоны](./components-and-templates.md), [Директивы](./directives.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [`watch` и `watchEffect`](./watchers.md), [Event loop](../javascript/event-loop.md), [Утечки памяти](../performance/memory-leaks.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Composables](./composables.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](./built-in-components.md)
 
 ## Теория
 
@@ -122,7 +122,7 @@ onMounted(() => console.log(box.value))
 ### Остальные хуки
 
 - **`onErrorCaptured(err, instance, info)`** ловит ошибки потомков, но не свои. Хуки вызываются снизу вверх по цепочке родителей, ошибка затем уходит в `app.config.errorHandler`; `return false` останавливает всплытие. `info` в dev — строка вида `'mounted hook'`. Подробно — в теме «Плагины и обработка ошибок».
-- **`onActivated` / `onDeactivated`** — для компонентов под `<KeepAlive>`: при переключении компонент не размонтируется, а деактивируется. Проверено: `mounted → activated → deactivated → activated → deactivated → unmounted`, то есть `activated` срабатывает и при первом монтировании. Подробно — в теме про `KeepAlive`.
+- **`onActivated` / `onDeactivated`** — для компонентов под `<KeepAlive>`: при переключении компонент не размонтируется, а деактивируется. Проверено: `mounted → activated → deactivated → activated → deactivated → unmounted`, то есть `activated` срабатывает и при первом монтировании. Подробно — в теме [«`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты»](./built-in-components.md).
 - **`onRenderTracked` / `onRenderTriggered`** — отладка: какие зависимости прочитал рендер и какая из них его перезапустила. Событие содержит `target`, `type` (`get`, `set`, `add`…), `key`, для `trigger` — `oldValue`/`newValue`. Работают только в dev и не на сервере: в prod-сборке колбэк не вызывается.
 
 > [!NOTE]
