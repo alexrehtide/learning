@@ -139,7 +139,7 @@ root.innerHTML = '<style>p { color: red }</style><p><slot></slot></p>';
 - **События** из shadow-дерева **перенацеливаются** (retargeting): снаружи `event.target` — хост. Наружу выходят только события с `composed: true`; все нативные события UI такие. Подробно — в теме [События и событийная модель](./events.md).
 - **Declarative Shadow DOM** — `<template shadowrootmode="open">` внутри хоста. Shadow root создаётся парсером, без JS, поэтому web-компоненты можно рендерить на сервере (Baseline 2024).
 
-Vue scoped CSS (`<style scoped>`) — **не** Shadow DOM: компилятор добавляет атрибут `data-v-xxx` к элементам и к селекторам. Изоляция условная: глобальные стили проникают внутрь, корневой элемент дочернего компонента получает стили родителя. Настоящую инкапсуляцию даёт `defineCustomElement`: он рендерит компонент в shadow root. С Vue 3.5 есть `shadowRoot: false` (без shadow root), `useHost()`, `useShadowRoot()` и `this.$host`. События `emit` выходят наружу как `CustomEvent`, аргументы — массивом в `event.detail`.
+Vue scoped CSS (`<style scoped>`) — **не** Shadow DOM: компилятор добавляет атрибут `data-v-xxx` к элементам и к селекторам. Изоляция условная: глобальные стили проникают внутрь, корневой элемент дочернего компонента получает стили родителя. Настоящую инкапсуляцию даёт `defineCustomElement`: он рендерит компонент в shadow root. С Vue 3.5 есть `shadowRoot: false` (без shadow root), `useHost()`, `useShadowRoot()` и `this.$host`. События `emit` выходят наружу как `CustomEvent`, аргументы — массивом в `event.detail`. Как устроены scoped-стили, `:deep()` и CSS Modules — в теме [«Стили в компонентах»](../vue/styles.md).
 
 ### Vue и DOM
 
