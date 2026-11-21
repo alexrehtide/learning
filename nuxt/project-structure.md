@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Nuxt — это Vue-приложение плюс соглашения: по каталогам он генерирует маршруты, плагины, middleware и реестр auto-imports, по умолчанию рендерит страницу на сервере и гидрирует её на клиенте, а серверную часть собирает Nitro. В Nuxt 4 код приложения лежит в `app/` (это `srcDir`), серверный — в `server/`, общий — в `shared/`, и у каждой части свой TS-проект. Auto-imports — не глобальные переменные: при сборке плагин на базе unimport дописывает в модуль `import` только для тех имён, которые в нём использованы, поэтому tree shaking работает. Цена — неявные зависимости: линтер их не видит, а ошибка контекста (composable приложения в `server/`) проявится только в `typecheck` или в рантайме.
 
-**Связанные темы:** [Composables](../vue/composables.md), [Компоненты и шаблоны](../vue/components-and-templates.md), [Встроенные компоненты](../vue/built-in-components.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Оптимизация загрузки](../performance/loading.md), [TypeScript во Vue](../vue/typescript.md), [Структура большого проекта и Feature-Sliced Design](../architecture/large-project-structure.md), [Масштабирование фронтенда: монорепозитории, микрофронтенды, Nuxt Layers](../architecture/scaling-frontend.md), [Pinia: плагины, SSR и тестирование](../state-management/pinia-advanced.md)
+**Связанные темы:** [Composables](../vue/composables.md), [Компоненты и шаблоны](../vue/components-and-templates.md), [Встроенные компоненты](../vue/built-in-components.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Оптимизация загрузки](../performance/loading.md), [TypeScript во Vue](../vue/typescript.md), [Структура большого проекта и Feature-Sliced Design](../architecture/large-project-structure.md), [Масштабирование фронтенда: монорепозитории, микрофронтенды, Nuxt Layers](../architecture/scaling-frontend.md), [Pinia: плагины, SSR и тестирование](../state-management/pinia-advanced.md), [Маршрутизация: файловые, динамические и вложенные маршруты, layouts](./routing.md)
 
 ## Теория
 
@@ -17,7 +17,7 @@ level: ядро
 
 Чистое Vue-приложение собирают из библиотек: роутер, SSR, сборщик, сервер. Nuxt берёт эти решения на себя:
 
-- **Соглашения вместо конфигурации.** Каталог определяет роль файла: `pages/` — маршруты Vue Router, `layouts/` — обёртки страниц, `plugins/` и `middleware/` регистрируются сами, `components/`, `composables/` и `utils/` попадают в auto-imports.
+- **Соглашения вместо конфигурации.** Каталог определяет роль файла: `pages/` — маршруты Vue Router ([«Маршрутизация»](./routing.md)), `layouts/` — обёртки страниц, `plugins/` и `middleware/` регистрируются сами, `components/`, `composables/` и `utils/` попадают в auto-imports.
 - **Универсальный рендеринг** по умолчанию: первый запрос рендерится на сервере (механика — в теме [«SSR и гидрация»](../vue/ssr-and-hydration.md)), дальше приложение работает как SPA.
 - **Nitro** — серверный движок: API-маршруты из `server/`, SSR-рендерер и сборка под платформу деплоя в `.output/`.
 - **Модули** — расширения сборки. Модуль вызывается при старте Nuxt и может добавить компоненты, auto-imports, плагины, серверные маршруты, поменять конфиг Vite или Nitro.

@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Vue Router — это matcher, который превращает URL в цепочку записей маршрутов (`matched`), и обёртка над History API, которая меняет URL без перезагрузки. Текущий маршрут хранится в `shallowRef`, каждая навигация заменяет его целиком. `RouterView` рендерит `matched[depth]`, поэтому при смене только `params` запись та же и компонент переиспользуется, а не пересоздаётся. Навигация — очередь guards: каждый может пропустить переход, отменить его (`false`) или перенаправить (вернуть location). Guard на клиенте — это UX, а не защита данных.
 
-**Связанные темы:** [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](./built-in-components.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [`watch` и `watchEffect`](./watchers.md), [Жизненный цикл](./lifecycle.md), [Composables](./composables.md), [Аутентификация на фронтенде](../security/authentication.md), [Оптимизация загрузки](../performance/loading.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [Данные и сеть в System Design](../architecture/data-and-network.md)
+**Связанные темы:** [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](./built-in-components.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [`watch` и `watchEffect`](./watchers.md), [Жизненный цикл](./lifecycle.md), [Composables](./composables.md), [Аутентификация на фронтенде](../security/authentication.md), [Оптимизация загрузки](../performance/loading.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [Данные и сеть в System Design](../architecture/data-and-network.md), [Маршрутизация: файловые, динамические и вложенные маршруты, layouts](../nuxt/routing.md)
 
 ## Теория
 
@@ -15,7 +15,7 @@ level: ядро
 
 ### Версия: Vue Router 5
 
-Актуальная major-версия — **5** (5.5.1 от 2026-11-13; 5.0.0 вышел 2026-01-29). Ветка 4.x ещё получает патчи (4.6.5). Пятая версия — переходный релиз: в ядро влит `unplugin-vue-router` (файловая маршрутизация и генерация типов). Для кода на v4 без этого плагина breaking changes нет. Плагин теперь импортируется из `vue-router/vite`, Data Loaders — из `vue-router/experimental`. Аргумент `next` в guards с 5.0.3 пишет предупреждение об устаревании в dev-режиме: guard должен возвращать значение. Vue Router 6 будет только ESM и уберёт устаревшие API. Nuxt строит маршруты из файлов поверх того же Vue Router; файловая маршрутизация — в разделе «Nuxt», здесь — ручная конфигурация.
+Актуальная major-версия — **5** (5.5.1 от 2026-11-13; 5.0.0 вышел 2026-01-29). Ветка 4.x ещё получает патчи (4.6.5). Пятая версия — переходный релиз: в ядро влит `unplugin-vue-router` (файловая маршрутизация и генерация типов). Для кода на v4 без этого плагина breaking changes нет. Плагин теперь импортируется из `vue-router/vite`, Data Loaders — из `vue-router/experimental`. Аргумент `next` в guards с 5.0.3 пишет предупреждение об устаревании в dev-режиме: guard должен возвращать значение. Vue Router 6 будет только ESM и уберёт устаревшие API. Nuxt строит маршруты из файлов поверх того же Vue Router; файловая маршрутизация — в теме [«Маршрутизация в Nuxt»](../nuxt/routing.md), здесь — ручная конфигурация.
 
 ### Из чего состоит роутер
 
