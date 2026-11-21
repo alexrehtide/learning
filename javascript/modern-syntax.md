@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Деструктуризация — шаблон, который раскладывает значение по переменным: объектный шаблон читает свойства, массивный — проходит по протоколу итерации. Значение по умолчанию срабатывает только на `undefined`. Многоточие означает spread там, где значения создаются, и rest там, где они собираются; оба копируют поверхностно. `?.` обрывает всю цепочку на `null`/`undefined`, `??` подставляет значение только для них, а `??=`, `||=` и `&&=` не выполняют запись, если она не нужна. Во Vue деструктуризация копирует значение и рвёт реактивность — кроме props в `<script setup>`, где компилятор переписывает обращения.
 
-**Связанные темы:** [Типы данных и приведение типов](./types-and-coercion.md), [Область видимости и hoisting](./scope-and-hoisting.md), [Функции и `this`](./functions-and-this.md), [Дескрипторы свойств, `Proxy` и `Reflect`](./property-descriptors-and-proxy.md), [Итераторы и генераторы](./iterators-and-generators.md), [Функциональные приёмы и иммутабельность](./functional-programming.md), [deepClone, deepEqual, get/set по пути](../live-coding/object-utilities.md)
+**Связанные темы:** [Типы данных и приведение типов](./types-and-coercion.md), [Область видимости и hoisting](./scope-and-hoisting.md), [Функции и `this`](./functions-and-this.md), [Дескрипторы свойств, `Proxy` и `Reflect`](./property-descriptors-and-proxy.md), [Итераторы и генераторы](./iterators-and-generators.md), [Функциональные приёмы и иммутабельность](./functional-programming.md), [deepClone, deepEqual, get/set по пути](../live-coding/object-utilities.md), [Pinia: сторы, getters, actions](../state-management/pinia.md)
 
 ## Теория
 
