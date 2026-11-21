@@ -345,7 +345,7 @@ link.addEventListener('click', async (event) => {
 });
 ```
 
-Так же устроена отправка формы с асинхронной проверкой: `preventDefault()` на `submit`, проверка, затем `form.requestSubmit()` (с валидацией и событием `submit`) или `fetch`. Не используйте `form.submit()`: он пропускает и то, и другое.
+Так же устроена отправка формы с асинхронной проверкой: `preventDefault()` на `submit`, проверка, затем `form.requestSubmit()` (с валидацией и событием `submit`) или `fetch`. Не используйте `form.submit()`: он пропускает и то, и другое. Формы во Vue целиком — в теме [«Формы и валидация»](../vue/forms-and-validation.md).
 :::
 
 ### 5. Композабл `onClickOutside` · сложно
