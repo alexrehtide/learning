@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Масштабировать приходится в первую очередь организацию: когда над одним фронтендом работают пять команд, узким местом становятся общие релизы и согласования, а не код. Есть три рычага разной цены. Монорепозиторий даёт общие пакеты и атомарные изменения, но релиз остаётся общим. Nuxt Layers собирают приложение из слоёв во время сборки, это тоже один деплой. Микрофронтенды дают командам независимый деплой, а платят за это дублированием зависимостей, сложной интеграцией и инфраструктурой. Senior начинает с вопроса «что именно мешает командам» и берёт самый дешёвый рычаг, который снимает проблему.
 
-**Связанные темы:** [Структура большого проекта и Feature-Sliced Design](large-project-structure.md), [Design system и UI-kit](design-systems.md), [Принципы и паттерны проектирования](principles-and-patterns.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Деревья и графы](../algorithms/trees-and-graphs.md), [Оптимизация загрузки](../performance/loading.md), [CSRF, clickjacking и supply chain](../security/csrf-and-clickjacking.md)
+**Связанные темы:** [Структура большого проекта и Feature-Sliced Design](large-project-structure.md), [Design system и UI-kit](design-systems.md), [Принципы и паттерны проектирования](principles-and-patterns.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Деревья и графы](../algorithms/trees-and-graphs.md), [Оптимизация загрузки](../performance/loading.md), [CSRF, clickjacking и supply chain](../security/csrf-and-clickjacking.md), [Структура проекта и auto-imports](../nuxt/project-structure.md)
 
 ## Теория
 
