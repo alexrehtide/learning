@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Фронтенд никого не защищает: guard в роутере и скрытая кнопка — это UX, а решение «можно или нельзя» принимает сервер на каждом запросе. Задача фронтенда — получить учётные данные безопасным способом и не дать их унести. Для SPA с внешним провайдером это Authorization Code + PKCE, а лучше — **BFF** (Backend for Frontend): токены живут на сервере, браузер держит только `HttpOnly`-cookie. JWT не делает систему «stateless» бесплатно: отзыв токена до истечения срока снова требует состояния на сервере. Поэтому access-токен короткий, а refresh-токен ротируется при каждом использовании.
 
-**Связанные темы:** [Middleware и плагины в Nuxt](../nuxt/middleware-and-plugins.md), [Хранилища браузера](../network/browser-storage.md), [Same-origin policy, CORS и cookies](../network/cors-and-cookies.md), [CSRF, clickjacking и supply chain](./csrf-and-clickjacking.md), [XSS и безопасный вывод во Vue](./xss.md), [Content Security Policy](./csp.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [Промисы](../javascript/promises.md), [Web Workers, Service Workers и PWA](../browser/workers.md)
+**Связанные темы:** [Middleware и плагины в Nuxt](../nuxt/middleware-and-plugins.md), [Хранилища браузера](../network/browser-storage.md), [Same-origin policy, CORS и cookies](../network/cors-and-cookies.md), [CSRF, clickjacking и supply chain](./csrf-and-clickjacking.md), [XSS и безопасный вывод во Vue](./xss.md), [Content Security Policy](./csp.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [Промисы](../javascript/promises.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Работа с данными: `$fetch`, `useFetch`, `useAsyncData`](../nuxt/data-fetching.md)
 
 ## Теория
 

@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Vue Router — это matcher, который превращает URL в цепочку записей маршрутов (`matched`), и обёртка над History API, которая меняет URL без перезагрузки. Текущий маршрут хранится в `shallowRef`, каждая навигация заменяет его целиком. `RouterView` рендерит `matched[depth]`, поэтому при смене только `params` запись та же и компонент переиспользуется, а не пересоздаётся. Навигация — очередь guards: каждый может пропустить переход, отменить его (`false`) или перенаправить (вернуть location). Guard на клиенте — это UX, а не защита данных.
 
-**Связанные темы:** [Middleware и плагины в Nuxt](../nuxt/middleware-and-plugins.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](./built-in-components.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [`watch` и `watchEffect`](./watchers.md), [Жизненный цикл](./lifecycle.md), [Composables](./composables.md), [Аутентификация на фронтенде](../security/authentication.md), [Оптимизация загрузки](../performance/loading.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [Данные и сеть в System Design](../architecture/data-and-network.md), [Маршрутизация: файловые, динамические и вложенные маршруты, layouts](../nuxt/routing.md)
+**Связанные темы:** [Middleware и плагины в Nuxt](../nuxt/middleware-and-plugins.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](./built-in-components.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [`watch` и `watchEffect`](./watchers.md), [Жизненный цикл](./lifecycle.md), [Composables](./composables.md), [Аутентификация на фронтенде](../security/authentication.md), [Оптимизация загрузки](../performance/loading.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [Данные и сеть в System Design](../architecture/data-and-network.md), [Маршрутизация: файловые, динамические и вложенные маршруты, layouts](../nuxt/routing.md), [Работа с данными: `$fetch`, `useFetch`, `useAsyncData`](../nuxt/data-fetching.md)
 
 ## Теория
 
@@ -114,7 +114,7 @@ HTML5-режим использует `history.pushState`, URL выглядит 
 - **После навигации.** Страница открывается сразу и показывает скелетон, данные загружаются в `watch` на параметр с `immediate`. Отклик мгновенный, нужно обрабатывать загрузку, ошибку и устаревший ответ (`onWatcherCleanup` + `AbortController`, см. [`watch`](./watchers.md)).
 - **До навигации.** Данные загружаются в guard (`beforeRouteEnter`, `beforeResolve` или `beforeEnter`), страница появляется уже с ними. Пока идёт запрос, пользователь видит старую страницу, поэтому нужен глобальный индикатор. Ошибку можно превратить в отмену или редирект на страницу ошибки.
 
-Классическая передача данных через `next(vm => vm.setData(data))` устарела вместе с `next`. На смену предлагают **Data Loaders** (`defineBasicLoader` из `vue-router/experimental`) — статус experimental. Nuxt решает ту же задачу через `useAsyncData` (раздел «Nuxt»).
+Классическая передача данных через `next(vm => vm.setData(data))` устарела вместе с `next`. На смену предлагают **Data Loaders** (`defineBasicLoader` из `vue-router/experimental`) — статус experimental. Nuxt решает ту же задачу через `useAsyncData` ([«Работа с данными в Nuxt»](../nuxt/data-fetching.md)).
 
 ### `scrollBehavior`
 

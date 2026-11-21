@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Во Vue единица обновления — компонент. Изменение состояния перезапускает рендер тех компонентов, которые его читали, а дальше компилятор сужает сравнение до динамических узлов (patch flags, block tree). Работы становится меньше, когда меньше компонентов перерисовывается (стабильные props, стабильные значения `computed`, `v-memo`) и когда реактивности меньше (`shallowRef`, `markRaw`). В Nuxt главная стоимость — загрузка и гидрация. Её снижают маленьким payload (`pick`/`transform`), ленивыми компонентами, отложенной гидрацией (`hydrate-on-*`) и server components.
 
-**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Механизм рендеринга: VDOM и компиляторные оптимизации](../vue/rendering-mechanism.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Core Web Vitals и измерение](./web-vitals.md), [Оптимизация загрузки](./loading.md), [Оптимизация runtime и профилирование](./runtime.md), [Утечки памяти](./memory-leaks.md), [HTTP-кэширование и CDN](../network/caching.md), [UI-coding: автокомплит, таблица, дерево](../live-coding/ui-widgets.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](../vue/built-in-components.md), [SSR и гидрация](../vue/ssr-and-hydration.md)
+**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Механизм рендеринга: VDOM и компиляторные оптимизации](../vue/rendering-mechanism.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Core Web Vitals и измерение](./web-vitals.md), [Оптимизация загрузки](./loading.md), [Оптимизация runtime и профилирование](./runtime.md), [Утечки памяти](./memory-leaks.md), [HTTP-кэширование и CDN](../network/caching.md), [UI-coding: автокомплит, таблица, дерево](../live-coding/ui-widgets.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](../vue/built-in-components.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Работа с данными: `$fetch`, `useFetch`, `useAsyncData`](../nuxt/data-fetching.md)
 
 ## Теория
 
@@ -142,7 +142,7 @@ Payload — часть HTML: каждый лишний килобайт откл
 > [!NOTE]
 > В Nuxt 3 было иначе: `data` был глубоким `ref`, а пустое значение было `null`, а не `undefined`. Миграционный баг — мутация вложенного поля `data.value.user.name = …`, после которой экран в Nuxt 4 не обновляется.
 
-`$fetch` в `setup()` выполняется дважды: на сервере и снова на клиенте при гидрации. Его используют для запросов по событиям, а для данных страницы — `useFetch`/`useAsyncData`.
+`$fetch` в `setup()` выполняется дважды: на сервере и снова на клиенте при гидрации. Его используют для запросов по событиям, а для данных страницы — `useFetch`/`useAsyncData`. Устройство payload, ключей и гидрации данных — в теме [«Работа с данными»](../nuxt/data-fetching.md).
 
 ### Nuxt: ленивые компоненты, отложенная гидрация, islands
 

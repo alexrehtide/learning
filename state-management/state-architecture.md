@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Состояние делят не по типу данных, а по тому, **кто владеет истиной** и **кому оно нужно**. Локальное UI-состояние живёт в компоненте, URL-состояние — в адресе, черновик формы — в форме, данные с сервера — в кэше запросов, а в глобальный стор попадает только общее клиентское состояние: сессия, корзина, настройки. Производное не хранят, а вычисляют. Каждое значение должно иметь ровно один источник истины. Почти все антипаттерны — это копия, которая со временем расходится с оригиналом.
 
-**Связанные темы:** [Pinia: сторы, getters, actions](./pinia.md), [Pinia: плагины, SSR и тестирование](./pinia-advanced.md), [Данные и сеть в System Design](../architecture/data-and-network.md), [Frontend System Design: фреймворк RADIO](../architecture/system-design-framework.md), [Структура большого проекта и Feature-Sliced Design](../architecture/large-project-structure.md), [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Composables](../vue/composables.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md), [Props, emits и `v-model` на компонентах](../vue/props-emits-v-model.md), [Формы и валидация](../vue/forms-and-validation.md), [Vue Router](../vue/vue-router.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [`watch` и `watchEffect`](../vue/watchers.md)
+**Связанные темы:** [Pinia: сторы, getters, actions](./pinia.md), [Pinia: плагины, SSR и тестирование](./pinia-advanced.md), [Данные и сеть в System Design](../architecture/data-and-network.md), [Frontend System Design: фреймворк RADIO](../architecture/system-design-framework.md), [Структура большого проекта и Feature-Sliced Design](../architecture/large-project-structure.md), [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Composables](../vue/composables.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md), [Props, emits и `v-model` на компонентах](../vue/props-emits-v-model.md), [Формы и валидация](../vue/forms-and-validation.md), [Vue Router](../vue/vue-router.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [`watch` и `watchEffect`](../vue/watchers.md), [Работа с данными: `$fetch`, `useFetch`, `useAsyncData`](../nuxt/data-fetching.md)
 
 ## Теория
 
@@ -62,7 +62,7 @@ Pinia — это и есть «синглтон», только привязан
 - `caches` — `shallowRef(new Map())` под `skipHydrate`: записи гидратируются отдельной сериализацией, а не общим механизмом Pinia.
 - Запись — `markRaw`-объект с `state` и `asyncStatus` в `shallowRef`, набором подписчиков `deps` и полем `pending`. Свежесть — геттер `stale`: `Date.now() >= when + staleTime`. Значения по умолчанию в исходниках: `staleTime: 5e3`, `gcTime: 3e5`, `refetchOnWindowFocus`, `refetchOnReconnect`, `refetchOnMount` — `true`.
 - **Дедупликация** — в `refresh`: если запись устарела, а запрос уже идёт, возвращается `entry.pending.refreshCall`. Два компонента с ключом `['user', 1]` вызвали `query` один раз (проверено).
-- Для сравнения, TanStack Query (`@tanstack/vue-query` 5.108): та же модель, свой `QueryClient`, без Pinia. В Nuxt часть этой роли берут `useAsyncData` и `useFetch`.
+- Для сравнения, TanStack Query (`@tanstack/vue-query` 5.108): та же модель, свой `QueryClient`, без Pinia. В Nuxt часть этой роли берут `useAsyncData` и `useFetch` ([«Работа с данными»](../nuxt/data-fetching.md)).
 
 ### URL как состояние
 
