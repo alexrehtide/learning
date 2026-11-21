@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Хук жизненного цикла — функция, которую `setup()` кладёт в массив на текущем экземпляре компонента, а рендерер вызывает в нужный момент. `before*`-хуки вызываются синхронно, до работы с DOM. `mounted`, `updated` и `unmounted` ставятся в post-очередь планировщика, поэтому дети завершают монтирование раньше родителя. Регистрация привязана к «текущему экземпляру», который существует только во время синхронного выполнения `setup()`. Поэтому хук в `setTimeout` или после `await` в обычном `async setup()` теряется, а в `<script setup>` компилятор восстанавливает экземпляр после `await`. На сервере хуки монтирования не вызываются вовсе.
 
-**Связанные темы:** [Компоненты и шаблоны](./components-and-templates.md), [Директивы](./directives.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [`watch` и `watchEffect`](./watchers.md), [Event loop](../javascript/event-loop.md), [Утечки памяти](../performance/memory-leaks.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Composables](./composables.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](./built-in-components.md)
+**Связанные темы:** [Компоненты и шаблоны](./components-and-templates.md), [Директивы](./directives.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [`watch` и `watchEffect`](./watchers.md), [Event loop](../javascript/event-loop.md), [Утечки памяти](../performance/memory-leaks.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Composables](./composables.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](./built-in-components.md), [SSR и гидрация](./ssr-and-hydration.md)
 
 ## Теория
 

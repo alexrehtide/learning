@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Утечка в SPA — это память, которая растёт с каждым повторением сценария (открыть и закрыть экран, сменить маршрут) и не возвращается после сборки мусора. Почти всегда причина одна: долгоживущий источник (`window`, таймер, стор, шина событий, кэш модуля) держит ссылку на короткоживущий объект, потому что у подписки не было владельца, который её снимет. Лечится дисциплиной «каждая подписка — со своим `dispose`»: `AbortController`, `onScopeDispose`, ограниченные кэши. Ищется в DevTools сравнением heap snapshots и путём удержания (retainers), а в проде измеряется через `performance.measureUserAgentSpecificMemory()`.
 
-**Связанные темы:** [Память и сборка мусора](../javascript/memory-and-gc.md), [Замыкания](../javascript/closures.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md), [События и событийная модель](../browser/events.md), [DOM API и observers](../browser/dom.md), [Оптимизация runtime и профилирование](./runtime.md), [Composables](../vue/composables.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](../vue/built-in-components.md)
+**Связанные темы:** [Память и сборка мусора](../javascript/memory-and-gc.md), [Замыкания](../javascript/closures.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md), [События и событийная модель](../browser/events.md), [DOM API и observers](../browser/dom.md), [Оптимизация runtime и профилирование](./runtime.md), [Composables](../vue/composables.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](../vue/built-in-components.md), [SSR и гидрация](../vue/ssr-and-hydration.md)
 
 ## Теория
 

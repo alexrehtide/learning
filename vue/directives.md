@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Встроенная директива — подсказка компилятору. `v-if` становится тернарным оператором с отдельным блоком, `v-for` — вызовом `renderList` с фрагментом, `v-html` — свойством `innerHTML`. Только `v-show`, `v-model` и пользовательские директивы доходят до рантайма как объекты с хуками и вызываются через `withDirectives`. Пользовательская директива — это хуки жизненного цикла **элемента** для низкоуровневой работы с DOM. Логику с состоянием выносят в composable, а разметку — в компонент.
 
-**Связанные темы:** [Компоненты и шаблоны](./components-and-templates.md), [Жизненный цикл](./lifecycle.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [Механизм рендеринга: VDOM и компиляторные оптимизации](./rendering-mechanism.md), [XSS и безопасный вывод во Vue](../security/xss.md), [События](../browser/events.md), [Утечки памяти](../performance/memory-leaks.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md)
+**Связанные темы:** [Компоненты и шаблоны](./components-and-templates.md), [Жизненный цикл](./lifecycle.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [Механизм рендеринга: VDOM и компиляторные оптимизации](./rendering-mechanism.md), [XSS и безопасный вывод во Vue](../security/xss.md), [События](../browser/events.md), [Утечки памяти](../performance/memory-leaks.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md), [SSR и гидрация](./ssr-and-hydration.md)
 
 ## Теория
 

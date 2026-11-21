@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Нефункциональные требования (non-functional requirements) описывают, **как** система работает: где строится HTML, что происходит без сети, сколько языков и есть ли RTL, как команда узнаёт о сбоях. Они меняют архитектуру сильнее, чем функции. Стратегию рендеринга выбирают по SEO, первой загрузке, персонализации, частоте обновления данных и цене сервера. Офлайн упирается в очередь мутаций и разрешение конфликтов. i18n строят на `Intl`, логических CSS-свойствах и словарях, которые грузятся по локали. Наблюдаемость — это ошибки с source maps, RUM, трассировка и feature flags. Senior поднимает эти темы сам и называет цену каждого решения.
 
-**Связанные темы:** [Frontend System Design: фреймворк RADIO](system-design-framework.md), [Данные и сеть в System Design](data-and-network.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Хранилища браузера](../network/browser-storage.md), [HTTP-кэширование и CDN](../network/caching.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [Оптимизация загрузки](../performance/loading.md), [Content Security Policy](../security/csp.md), [Аутентификация на фронтенде](../security/authentication.md), [Плагины и обработка ошибок](../vue/plugins-and-error-handling.md)
+**Связанные темы:** [Frontend System Design: фреймворк RADIO](system-design-framework.md), [Данные и сеть в System Design](data-and-network.md), [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Хранилища браузера](../network/browser-storage.md), [HTTP-кэширование и CDN](../network/caching.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [Оптимизация загрузки](../performance/loading.md), [Content Security Policy](../security/csp.md), [Аутентификация на фронтенде](../security/authentication.md), [Плагины и обработка ошибок](../vue/plugins-and-error-handling.md), [SSR и гидрация](../vue/ssr-and-hydration.md)
 
 ## Теория
 
@@ -49,7 +49,7 @@ level: ядро
 4. **Сколько стоит сервер и кто его поддерживает?** SSR — это Node-процессы, утечки памяти на сервере, холодные старты, мониторинг. У статики на CDN этого нет.
 5. **Сколько JS нужно после загрузки?** Почти не нужно (контентный сайт) → islands дают SSR без цены полной гидрации.
 
-Типичный итог — **гибрид**: главная и каталог — SWR, статьи — prerender, личный кабинет — CSR, оформление заказа — SSR без кэша. В Nuxt это `routeRules`: `prerender`, `swr`, `isr`, `ssr: false`, `headers`, `redirect`, `noScripts`. Механизм SSR и гидрации здесь не разбираем — только выбор.
+Типичный итог — **гибрид**: главная и каталог — SWR, статьи — prerender, личный кабинет — CSR, оформление заказа — SSR без кэша. В Nuxt это `routeRules`: `prerender`, `swr`, `isr`, `ssr: false`, `headers`, `redirect`, `noScripts`. Механизм SSR и гидрации здесь не разбираем — только выбор. Механизм — в [«SSR и гидрации»](../vue/ssr-and-hydration.md).
 
 > [!WARNING]
 > «SSR, потому что Nuxt» — не аргумент. Если у админки нет SEO, SSR добавляет сервер, ошибки гидрации и ограничения на API браузера без выигрыша. Обратная ошибка — SPA для магазина: LCP ждёт цепочку HTML → бандл → API → картинка, а превью ссылок пустые.
