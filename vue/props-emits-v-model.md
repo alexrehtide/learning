@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Props передают данные сверху вниз, события сообщают об изменениях снизу вверх. Владелец данных один, и меняет их только он. `emit('change')` — синхронный вызов функции `onChange` из props родителя, а не DOM-событие, поэтому событие не всплывает. `v-model` на компоненте — сахар компилятора: prop `modelValue` плюс слушатель `onUpdate:modelValue`. `defineModel` прячет эту пару за ref и работает как локальное состояние, если родитель не передал и значение, и слушатель. Деструктуризация props в 3.5 реактивна, потому что компилятор переписывает каждое обращение в `__props.x`. Всё, что не объявлено как prop или событие, становится fallthrough-атрибутом корневого элемента.
 
-**Связанные темы:** [Компоненты и шаблоны](./components-and-templates.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [`watch` и `watchEffect`](./watchers.md), [Директивы](./directives.md), [Жизненный цикл](./lifecycle.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md), [События](../browser/events.md), [Современный синтаксис](../javascript/modern-syntax.md)
+**Связанные темы:** [Компоненты и шаблоны](./components-and-templates.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [`watch` и `watchEffect`](./watchers.md), [Директивы](./directives.md), [Жизненный цикл](./lifecycle.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md), [События](../browser/events.md), [Современный синтаксис](../javascript/modern-syntax.md), [Слоты и provide/inject](./slots-and-provide-inject.md)
 
 ## Теория
 
