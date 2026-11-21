@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Во Vue единица обновления — компонент. Изменение состояния перезапускает рендер тех компонентов, которые его читали, а дальше компилятор сужает сравнение до динамических узлов (patch flags, block tree). Работы становится меньше, когда меньше компонентов перерисовывается (стабильные props, стабильные значения `computed`, `v-memo`) и когда реактивности меньше (`shallowRef`, `markRaw`). В Nuxt главная стоимость — загрузка и гидрация. Её снижают маленьким payload (`pick`/`transform`), ленивыми компонентами, отложенной гидрацией (`hydrate-on-*`) и server components.
 
-**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Core Web Vitals и измерение](./web-vitals.md), [Оптимизация загрузки](./loading.md), [Оптимизация runtime и профилирование](./runtime.md), [Утечки памяти](./memory-leaks.md), [HTTP-кэширование и CDN](../network/caching.md), [UI-coding: автокомплит, таблица, дерево](../live-coding/ui-widgets.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](../vue/built-in-components.md)
+**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](../vue/reactivity.md), [Механизм рендеринга: VDOM и компиляторные оптимизации](../vue/rendering-mechanism.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Core Web Vitals и измерение](./web-vitals.md), [Оптимизация загрузки](./loading.md), [Оптимизация runtime и профилирование](./runtime.md), [Утечки памяти](./memory-leaks.md), [HTTP-кэширование и CDN](../network/caching.md), [UI-coding: автокомплит, таблица, дерево](../live-coding/ui-widgets.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](../vue/built-in-components.md)
 
 ## Теория
 
@@ -15,7 +15,7 @@ level: ядро
 
 ### Откуда берётся работа
 
-`ref`, `reactive` и `computed` с точки зрения пользователя разобраны в теме [«Реактивность: `ref`, `reactive`, `computed`»](../vue/reactivity.md), VDOM — в разделе «Vue», реактивность с нуля — в теме [«Мини-реактивность в стиле Vue»](../live-coding/mini-reactivity.md). Здесь нужна только модель стоимости.
+`ref`, `reactive` и `computed` с точки зрения пользователя разобраны в теме [«Реактивность: `ref`, `reactive`, `computed`»](../vue/reactivity.md), VDOM и компиляторные оптимизации изнутри — в теме [«Механизм рендеринга»](../vue/rendering-mechanism.md), реактивность с нуля — в теме [«Мини-реактивность в стиле Vue»](../live-coding/mini-reactivity.md). Здесь нужна только модель стоимости.
 
 1. У каждого экземпляра компонента есть **render effect**. Во время рендера он подписывается на всё реактивное, что прочитал.
 2. Запись в реактивное состояние ставит затронутые эффекты в очередь. Vue выполняет очередь одной микрозадачей, родители раньше детей.

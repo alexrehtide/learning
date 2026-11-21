@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Компонент Vue — это объект опций с render-функцией. SFC (`.vue`-файл) — его исходник: на этапе сборки `@vue/compiler-sfc` превращает `<template>` в render-функцию, а `<script setup>` — в функцию `setup()`. В production шаблон встраивается прямо в замыкание `setup`, поэтому он обращается к локальным переменным без прокси, а снаружи компонент по умолчанию закрыт: родитель через ref видит только то, что открыто через `defineExpose`. Composition API группирует логику по смыслу, хорошо типизируется и переиспользуется через composables вместо mixins. Options API построен поверх него и уместен для простых компонентов и legacy-кода.
 
-**Связанные темы:** [Функции и `this`](../javascript/functions-and-this.md), [Замыкания](../javascript/closures.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [Жизненный цикл](./lifecycle.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [XSS и безопасный вывод во Vue](../security/xss.md), [Content Security Policy](../security/csp.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md), [Слоты и provide/inject](./slots-and-provide-inject.md)
+**Связанные темы:** [Функции и `this`](../javascript/functions-and-this.md), [Замыкания](../javascript/closures.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [Жизненный цикл](./lifecycle.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [Механизм рендеринга: VDOM и компиляторные оптимизации](./rendering-mechanism.md), [XSS и безопасный вывод во Vue](../security/xss.md), [Content Security Policy](../security/csp.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md), [Слоты и provide/inject](./slots-and-provide-inject.md)
 
 ## Теория
 
@@ -76,7 +76,7 @@ export default {
 - Статический `<p>` создаётся один раз и хранится в `_cache[0]` с флагом `CACHED`. Наверх модуля (`_hoisted_1`) вынесен только список динамических props `["id"]`: по нему и patch flag `8 /* PROPS */` рантайм сравнивает один атрибут, а не все.
 - `MyButton` импортирован, и компилятор подставляет саму переменную. `OtherThing` не найден среди привязок, поэтому он ищется в runtime через `resolveComponent`.
 
-Patch flags, блоки и кэширование подробно разобраны в [«Производительности Vue и Nuxt»](../performance/vue-performance.md#что-делает-компилятор).
+Что рантайм делает с patch flags и блоками — в [«Механизме рендеринга»](./rendering-mechanism.md#блоки-и-tree-flattening), как они влияют на производительность — в [«Производительности Vue и Nuxt»](../performance/vue-performance.md#что-делает-компилятор).
 
 ### Синтаксис шаблона
 
