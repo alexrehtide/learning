@@ -89,7 +89,7 @@ _createBlock(_Teleport, { to: "#modals", defer: "" }, [ /* children as an array,
 
 **Ошибки.** Своего состояния ошибки у `Suspense` нет. Ошибку async `setup` ловят `onErrorCaptured` выше по дереву или `app.config.errorHandler`. Проверено: после ошибки `Suspense` всё равно разрешается, и упавший компонент рендерится пустым комментарием. UI ошибки делают сами: флаг в `onErrorCaptured` и `v-if`.
 
-С роутером порядок вложения такой: `RouterView` → `Transition` → `KeepAlive` → `Suspense` → компонент (пример ниже).
+С [роутером](./vue-router.md) порядок вложения такой: `RouterView` → `Transition` → `KeepAlive` → `Suspense` → компонент (пример ниже).
 
 ### `Transition` и `TransitionGroup`
 
