@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Сужение (narrowing) — это анализ потока управления (control flow analysis): компилятор идёт по веткам кода и в каждой точке знает более точный тип переменной, чем объявленный. Сужают обычные JavaScript-проверки: `typeof`, `===`, `in`, `instanceof`, проверка на истинность, присваивание, а также свои type guards и assertion functions. Discriminated union — объединение объектов с общим полем-литералом, по которому `switch` выбирает ровно один вариант. Остаток после всех веток — `never`, и на этом строится проверка исчерпываемости.
 
-**Связанные темы:** [Система типов: структурная типизация, `type` и `interface`](./type-system.md), [Generics](./generics.md), [Utility, conditional и mapped types](./type-level-programming.md), [Типы данных и приведение типов](../javascript/types-and-coercion.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md)
+**Связанные темы:** [Система типов: структурная типизация, `type` и `interface`](./type-system.md), [Generics](./generics.md), [Utility, conditional и mapped types](./type-level-programming.md), [Типы данных и приведение типов](../javascript/types-and-coercion.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [async/await, обработка ошибок и отмена](../javascript/async-await.md), [TypeScript во Vue](../vue/typescript.md)
 
 ## Теория
 
@@ -349,7 +349,7 @@ if (state.value.status === 'success') state.value.data.length; // data: User[]
 
 Три независимых `ref` дают 2 × 2 × 2 = 8 комбинаций, из которых осмысленны четыре. Объединение описывает ровно эти четыре. Каждое присваивание целиком заменяет состояние, поэтому забыть сбросить `error` при новой загрузке невозможно.
 
-Проверка исчерпываемости работает и здесь: если в шаблоне или `computed` разбирать `status` через `switch` с `assertNever`, новый статус (`'refreshing'`) заставит обновить все места разбора. Типизация `ref` и шаблонов с `vue-tsc` — в теме «TypeScript во Vue».
+Проверка исчерпываемости работает и здесь: если в шаблоне или `computed` разбирать `status` через `switch` с `assertNever`, новый статус (`'refreshing'`) заставит обновить все места разбора. Типизация `ref` и шаблонов с `vue-tsc` — в теме [«TypeScript во Vue»](../vue/typescript.md).
 
 Если состояние лежит в Pinia и читается внутри колбэка или после `await`, его копируют в `const`: сужение свойства в колбэк не переносится, а после `await` оно сохраняется, хотя значение могло смениться.
 :::

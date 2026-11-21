@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Generic — это функция, тип или класс с **параметром типа**: тип, который подставляется при использовании, как аргумент при вызове. Параметр нужен, чтобы выразить **связь** между типами: «возвращает элемент того же типа, что лежит в массиве», «ключ — один из ключей этого объекта». Аргументы типа компилятор обычно выводит сам по аргументам вызова, а `extends` задаёт ограничение, без которого с параметром внутри функции почти ничего нельзя сделать. В рантайме параметров типа нет: они стираются вместе с остальными типами.
 
-**Связанные темы:** [Система типов: структурная типизация, `type` и `interface`](./type-system.md), [Сужение типов и discriminated unions](./narrowing.md), [Utility, conditional и mapped types](./type-level-programming.md), [Функции и `this`](../javascript/functions-and-this.md), [Прототипы и классы](../javascript/prototypes-and-classes.md)
+**Связанные темы:** [Система типов: структурная типизация, `type` и `interface`](./type-system.md), [Сужение типов и discriminated unions](./narrowing.md), [Utility, conditional и mapped types](./type-level-programming.md), [Функции и `this`](../javascript/functions-and-this.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [TypeScript во Vue](../vue/typescript.md)
 
 ## Теория
 
@@ -144,7 +144,7 @@ const theme = useStorage('theme', 'light' as 'light' | 'dark'); // Ref<'light' |
 const user = ref<{ id: number } | null>(null); // explicit: ref(null) would be Ref<null>
 ```
 
-`as Ref<T>` здесь нужен из-за того, что `ref` разворачивает вложенные `ref` в типе (`UnwrapRef<T>`). Для произвольного `T` компилятор не может доказать, что `Ref<UnwrapRef<T>>` — это `Ref<T>`. Подробнее о типах `ref` — в теме «TypeScript во Vue».
+`as Ref<T>` здесь нужен из-за того, что `ref` разворачивает вложенные `ref` в типе (`UnwrapRef<T>`). Для произвольного `T` компилятор не может доказать, что `Ref<UnwrapRef<T>>` — это `Ref<T>`. Подробнее о типах `ref` — в теме [«TypeScript во Vue»](../vue/typescript.md).
 
 ```ts
 // A typed API client: the path decides the response type.
@@ -286,7 +286,7 @@ class Emitter<Events extends Record<string, unknown>> {
 
 Хранилище — mapped type: для каждого ключа свой `Set` слушателей нужного типа. Без него пришлось бы хранить `Set<Listener<any>>` и терять проверку внутри класса.
 
-Так же типизирован `defineEmits` во Vue: карта событий → тип `emit`. Об этом — в теме «TypeScript во Vue».
+Так же типизирован `defineEmits` во Vue: карта событий → тип `emit`. Об этом — в теме [«TypeScript во Vue»](../vue/typescript.md).
 
 Сложность: `on` — O(1), `emit` — O(k), где k — число слушателей события.
 :::
