@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** `reactive(obj)` возвращает `Proxy`: чтение свойства подписывает текущий эффект, запись перезапускает подписчиков. `Proxy` не умеет оборачивать примитивы и переменные, поэтому `ref` — объект-контейнер с геттером и сеттером `.value`. Реактивна ссылка, через которую идёт доступ, а не значение. Отсюда все ловушки: деструктуризация, замена объекта целиком, сравнение прокси с исходником. `computed` — ленивый кэширующий `ref`: геттер выполняется только при чтении после изменения зависимостей, а подписчики просыпаются, только если значение действительно изменилось.
 
-**Связанные темы:** [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Дескрипторы свойств, `Proxy` и `Reflect`](../javascript/property-descriptors-and-proxy.md), [Компоненты и шаблоны](./components-and-templates.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [`watch` и `watchEffect`](./watchers.md)
+**Связанные темы:** [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Дескрипторы свойств, `Proxy` и `Reflect`](../javascript/property-descriptors-and-proxy.md), [Компоненты и шаблоны](./components-and-templates.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [Память и сборка мусора](../javascript/memory-and-gc.md), [`watch` и `watchEffect`](./watchers.md), [Composables](./composables.md)
 
 ## Теория
 

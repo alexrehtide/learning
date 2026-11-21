@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Watcher — реактивный эффект, который выполняет побочное действие в ответ на изменение данных. `watch(source, cb)` следит за явно указанным источником (ref, геттер, `reactive`, массив) и вызывает колбэк с новым и старым значением. `watchEffect(fn)` сам собирает зависимости при выполнении, но только до первого `await`. Колбэк по умолчанию выполняется пакетно, перед рендером компонента (`flush: 'pre'`). Перед каждым перезапуском и при остановке Vue вызывает очистку (`onWatcherCleanup`): так отменяют запросы и устраняют гонки. Watcher, созданный синхронно в `setup()`, останавливается при размонтировании сам, созданный асинхронно — течёт.
 
-**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Event loop](../javascript/event-loop.md), [async/await](../javascript/async-await.md), [Утечки памяти](../performance/memory-leaks.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [Компоненты и шаблоны](./components-and-templates.md)
+**Связанные темы:** [Реактивность: `ref`, `reactive`, `computed`](./reactivity.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [Event loop](../javascript/event-loop.md), [async/await](../javascript/async-await.md), [Утечки памяти](../performance/memory-leaks.md), [Производительность Vue и Nuxt](../performance/vue-performance.md), [Компоненты и шаблоны](./components-and-templates.md), [Composables](./composables.md)
 
 ## Теория
 

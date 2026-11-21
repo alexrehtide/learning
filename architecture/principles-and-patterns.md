@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Принципы проектирования нужны, чтобы изменения стоили дёшево. Код, который меняется вместе, держат рядом (связность, cohesion), а между частями, которые меняются независимо, оставляют узкий контракт (зацепление, coupling). SOLID, DRY, KISS и YAGNI — эвристики вокруг этой идеи, а не законы, и у каждой есть цена: преждевременная абстракция обходится дороже дублирования. Во Vue паттерны встречаются в своих формах. Наблюдатель — это сама реактивность. Стратегия — словарь функций или `<component :is>`. Адаптер и фасад стоят на границе с API. Внедрение зависимостей делают через `provide`/`inject` и плагины. Композиция вместо наследования — это composables вместо mixins. Senior на интервью не перечисляет паттерны, а объясняет, какую проблему решает выбранный и чем за него платят.
 
-**Связанные темы:** [EventEmitter](../live-coding/event-emitter.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md), [UI-coding: автокомплит, таблица, дерево](../live-coding/ui-widgets.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Generics](../typescript/generics.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md)
+**Связанные темы:** [EventEmitter](../live-coding/event-emitter.md), [Мини-реактивность в стиле Vue](../live-coding/mini-reactivity.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md), [UI-coding: автокомплит, таблица, дерево](../live-coding/ui-widgets.md), [Функциональные приёмы и иммутабельность](../javascript/functional-programming.md), [Прототипы и классы](../javascript/prototypes-and-classes.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Generics](../typescript/generics.md), [Дескрипторы свойств, Proxy и Reflect](../javascript/property-descriptors-and-proxy.md), [Слоты и provide/inject](../vue/slots-and-provide-inject.md), [Composables](../vue/composables.md)
 
 ## Теория
 
@@ -72,7 +72,7 @@ Composable решает все три. Результат деструктури
 Composable против renderless-компонента. Документация советует composable для чистой логики, а компонент — когда переиспользуются и логика, и разметка. Renderless-компонент создаёт лишний экземпляр компонента, и на уровне всего приложения это заметные накладные расходы.
 
 > [!NOTE]
-> Composables выносят не только для переиспользования. Документация прямо предлагает дробить большой компонент на `useFeatureA`, `useFeatureB` по логическим задачам и называет их «сервисами в области видимости компонента». Это SRP внутри компонента. Соглашения composable (`use`-префикс, `toValue` для аргументов, обычный объект из `ref` на выходе, очистка эффектов, синхронный вызов в `setup`) — тема раздела «Vue».
+> Composables выносят не только для переиспользования. Документация прямо предлагает дробить большой компонент на `useFeatureA`, `useFeatureB` по логическим задачам и называет их «сервисами в области видимости компонента». Это SRP внутри компонента. Соглашения composable (`use`-префикс, `toValue` для аргументов, обычный объект из `ref` на выходе, очистка эффектов, синхронный вызов в `setup`) — в теме [«Composables»](../vue/composables.md).
 
 ### Паттерны, которые встречаются во Vue-коде
 
