@@ -7,11 +7,11 @@ level: ядро
 
 > **Коротко.** Nuxt при сборке превращает файлы `app/pages/` в обычные записи Vue Router: каждая страница — ленивый чанк, а метаданные из `definePageMeta` вырезаются в отдельный модуль и попадают в общий бандл. `<NuxtPage>` — это `RouterView`, обёрнутый в `Suspense`, `Transition` и `KeepAlive`, и с ключом по пути: в отличие от голого Vue Router, смена параметра (`/users/1 → /users/2`) пересоздаёт страницу. `definePageMeta` — макрос компилятора, поэтому он вычисляется один раз при загрузке модуля и не видит состояние компонента. Layouts — асинхронные компоненты-обёртки, которые `<NuxtLayout>` выбирает по `meta.layout`.
 
-**Связанные темы:** [Vue Router](../vue/vue-router.md), [Структура проекта и auto-imports](./project-structure.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](../vue/built-in-components.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Оптимизация загрузки](../performance/loading.md), [TypeScript во Vue](../vue/typescript.md), [`watch` и `watchEffect`](../vue/watchers.md), [Структура большого проекта и Feature-Sliced Design](../architecture/large-project-structure.md), [Разбор: лента новостей](../architecture/case-news-feed.md)
+**Связанные темы:** [Vue Router](../vue/vue-router.md), [Структура проекта и auto-imports](./project-structure.md), [Middleware и плагины](./middleware-and-plugins.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](../vue/built-in-components.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Оптимизация загрузки](../performance/loading.md), [TypeScript во Vue](../vue/typescript.md), [`watch` и `watchEffect`](../vue/watchers.md), [Структура большого проекта и Feature-Sliced Design](../architecture/large-project-structure.md), [Разбор: лента новостей](../architecture/case-news-feed.md)
 
 ## Теория
 
-Все фрагменты проверены на Nuxt 4.6.4 (последний релиз на 2026-11-21) с Nitro 2.13.6, Vue 3.5.45 и Vue Router 5.5.1 в Node 26.13.1: `nuxi dev`, `nuxi build` + `node .output/server/index.mjs`, клиентская навигация — в браузере через Playwright, типы — `nuxi typecheck` на TypeScript 6.0. Устройство описано по `node_modules/nuxt/dist` (`pages/runtime/`, `app/components/`, `app/composables/router.js`). Сам Vue Router (matcher, guards, `scrollBehavior`) разобран в теме [«Vue Router»](../vue/vue-router.md); здесь — то, что Nuxt делает поверх него. Route middleware — следующая тема раздела.
+Все фрагменты проверены на Nuxt 4.6.4 (последний релиз на 2026-11-21) с Nitro 2.13.6, Vue 3.5.45 и Vue Router 5.5.1 в Node 26.13.1: `nuxi dev`, `nuxi build` + `node .output/server/index.mjs`, клиентская навигация — в браузере через Playwright, типы — `nuxi typecheck` на TypeScript 6.0. Устройство описано по `node_modules/nuxt/dist` (`pages/runtime/`, `app/components/`, `app/composables/router.js`). Сам Vue Router (matcher, guards, `scrollBehavior`) разобран в теме [«Vue Router»](../vue/vue-router.md); здесь — то, что Nuxt делает поверх него. Route middleware — в теме [«Middleware и плагины»](./middleware-and-plugins.md).
 
 ### Что Nuxt генерирует из `app/pages/`
 
@@ -239,7 +239,7 @@ export default defineNuxtConfig({
 :::
 
 ::: details Что поменяется в маршрутизации при переходе на Nuxt 5
-Проверяется флагом `future.compatibilityVersion: 5` на Nuxt 4. Пути становятся регистрозависимыми: `/About` больше не совпадает с `about.vue` и уходит в catch-all или 404. Нужно найти ссылки со смешанным регистром или заранее включить `router.options.sensitive`. Включаются typed pages: имена маршрутов проверяются, `useRoute('name').params` типизирован, а код, который читает `params` без имени, перестаёт компилироваться. Сериализуемые поля `definePageMeta` извлекаются при сборке, имя компонента страницы совпадает с именем маршрута. Плюс `navigateTo` в middleware прерывает его выполнение (`navigateToEarlyReturn`).
+Проверяется флагом `future.compatibilityVersion: 5` на Nuxt 4. Пути становятся регистрозависимыми: `/About` больше не совпадает с `about.vue` и уходит в catch-all или 404. Нужно найти ссылки со смешанным регистром или заранее включить `router.options.sensitive`. Включаются typed pages: имена маршрутов проверяются, `useRoute('name').params` типизирован, а код, который читает `params` без имени, перестаёт компилироваться. Сериализуемые поля `definePageMeta` извлекаются при сборке, имя компонента страницы совпадает с именем маршрута. Плюс `await navigateTo()` на верхнем уровне `<script setup>` прерывает `setup` (`navigateToEarlyReturn`).
 :::
 
 ## Задачи

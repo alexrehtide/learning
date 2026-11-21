@@ -113,7 +113,7 @@ pinia.state.value = window.__PINIA_STATE__
 - хук `app:rendered` на сервере: `payload.pinia = toRaw(pinia).state.value` и `setActivePinia(undefined)`. Payload сериализует Nuxt через `devalue`;
 - payload-плагин регистрирует reducer `skipHydrate`: в Nuxt помеченные значения **не попадают** в payload вообще;
 - автоимпорт `defineStore`, `storeToRefs`, `acceptHMRUpdate`, `usePinia()` и сторов из `storesDirs` (по умолчанию `stores` в `app/` каждого слоя, в Nuxt 4 — `app/stores`);
-- плагины Pinia подключают через плагин Nuxt: `defineNuxtPlugin(({ $pinia }) => { $pinia.use(myPlugin) })`.
+- плагины Pinia подключают через [плагин Nuxt](../nuxt/middleware-and-plugins.md#плагины-когда-и-в-каком-порядке): `defineNuxtPlugin(({ $pinia }) => { $pinia.use(myPlugin) })`.
 
 > [!TIP]
 > В Nuxt данные в стор загружают через `await callOnce('user', () => user.fetch())`: запрос выполнится на сервере, результат уйдёт на клиент вместе с state, и клиент не повторит запрос. Без `callOnce` вызов в `setup` сработает и на сервере, и при гидратации.
