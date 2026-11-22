@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Браузер разбирает введённое, находит сервер (DNS), устанавливает соединение (TCP + TLS или QUIC) и получает HTML. HTML разбирается **потоково**: DOM строится по мере прихода байтов. Внешний CSS **блокирует рендеринг**, а через «таблицу стилей, блокирующую скрипты», — и выполнение синхронных скриптов. Синхронный `<script>` **блокирует парсер**. `defer` и `type="module"` выполняются после разбора, но до `DOMContentLoaded`, `async` — когда готов. Preload scanner заранее находит ресурсы в разметке, пока парсер стоит. Быстрая страница — это короткий **критический путь**: мало блокирующих ресурсов, мало байтов, мало сетевых round trip.
 
-**Связанные темы:** [Event loop](../javascript/event-loop.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [Web Workers, Service Workers и PWA](./workers.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [HTTP-кэширование и CDN](../network/caching.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [Оптимизация загрузки](../performance/loading.md), [SSR и гидрация](../vue/ssr-and-hydration.md)
+**Связанные темы:** [Event loop](../javascript/event-loop.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Конвейер рендеринга: layout, paint, composite](./rendering-pipeline.md), [Web Workers, Service Workers и PWA](./workers.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [HTTP-кэширование и CDN](../network/caching.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [Оптимизация загрузки](../performance/loading.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Режимы рендеринга и lazy hydration](../nuxt/rendering-modes.md)
 
 ## Теория
 
@@ -108,7 +108,7 @@ CSS не блокирует **парсер**, но:
 
 - **Vite** собирает `index.html` с `<script type="module" crossorigin src="/assets/index-….js">` в `<head>`: модуль отложен, поэтому к моменту `createApp().mount('#app')` DOM уже разобран. Чанки, которые точно понадобятся, Vite объявляет через `<link rel="modulepreload">`, срезая водопад по графу модулей.
 - **SPA** отдаёт пустой `<div id="app">`. First Contentful Paint случается только после загрузки и выполнения JS, а preload scanner не видит ни данных, ни изображений. Отсюда типичный водопад: HTML → бандл → API → картинка.
-- **SSR в Nuxt** отдаёт готовую разметку: контент и `<img src>` видны сканеру и рисуются сразу после CSS. Скрипты — модули, страница становится **интерактивной** только после загрузки JS и гидрации. Состояние приходит в той же странице как payload (`<script type="application/json" id="__NUXT_DATA__">`), без второго запроса. Подробно — темы [«SSR и гидрация»](../vue/ssr-and-hydration.md) и «Режимы рендеринга».
+- **SSR в Nuxt** отдаёт готовую разметку: контент и `<img src>` видны сканеру и рисуются сразу после CSS. Скрипты — модули, страница становится **интерактивной** только после загрузки JS и гидрации. Состояние приходит в той же странице как payload (`<script type="application/json" id="__NUXT_DATA__">`), без второго запроса. Подробно — темы [«SSR и гидрация»](../vue/ssr-and-hydration.md) и [«Режимы рендеринга и lazy hydration»](../nuxt/rendering-modes.md).
 
 ## Примеры
 
