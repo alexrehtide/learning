@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Плагин Pinia — функция, которую Pinia вызывает для каждого **нового** стора после `app.use(pinia)`, внутри effect scope этого стора. Возвращённый объект копируется в стор, а новый state добавляют в `store.$state`, иначе его не увидят SSR и devtools. На сервере у каждого запроса своя pinia, но `activePinia` — одна глобальная переменная, поэтому вне `setup` pinia передают явно, а сторы в action берут до первого `await`. Гидратация — это присваивание `pinia.state.value` до первого `useStore()`: стор при создании берёт готовое состояние вместо начального, а `skipHydrate` исключает client-only значения. В тестах — свежая pinia на каждый тест или `createTestingPinia`, которая через те же плагины подменяет actions шпионами.
 
-**Связанные темы:** [Pinia: сторы, getters, actions](./pinia.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Плагины и обработка ошибок](../vue/plugins-and-error-handling.md), [Composables](../vue/composables.md), [Система типов: структурная типизация, `type` и `interface`](../typescript/type-system.md), [TypeScript во Vue](../vue/typescript.md), [Утечки памяти](../performance/memory-leaks.md), [XSS и безопасный вывод во Vue](../security/xss.md), [debounce и throttle](../live-coding/debounce-throttle.md), [Хранилища браузера](../network/browser-storage.md), [Архитектура состояния: локальное, глобальное, серверное](./state-architecture.md), [Структура проекта и auto-imports](../nuxt/project-structure.md)
+**Связанные темы:** [Состояние и конфигурация: `useState` vs Pinia, `runtimeConfig`](../nuxt/state-and-config.md), [Pinia: сторы, getters, actions](./pinia.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Плагины и обработка ошибок](../vue/plugins-and-error-handling.md), [Composables](../vue/composables.md), [Система типов: структурная типизация, `type` и `interface`](../typescript/type-system.md), [TypeScript во Vue](../vue/typescript.md), [Утечки памяти](../performance/memory-leaks.md), [XSS и безопасный вывод во Vue](../security/xss.md), [debounce и throttle](../live-coding/debounce-throttle.md), [Хранилища браузера](../network/browser-storage.md), [Архитектура состояния: локальное, глобальное, серверное](./state-architecture.md), [Структура проекта и auto-imports](../nuxt/project-structure.md)
 
 ## Теория
 
@@ -107,7 +107,7 @@ pinia.state.value = window.__PINIA_STATE__
 
 ### `@pinia/nuxt`
 
-Подробно — в разделе «Nuxt». По исходникам модуля:
+Подробно — в теме [«Состояние и конфигурация»](../nuxt/state-and-config.md). По исходникам модуля:
 
 - runtime-плагин: `createPinia()`, `vueApp.use(pinia)`, `setActivePinia(pinia)`. На клиенте, если в `nuxtApp.payload.pinia` есть состояние, присваивает его в `pinia.state.value` до появления сторов; pinia доступна как `$pinia`;
 - хук `app:rendered` на сервере: `payload.pinia = toRaw(pinia).state.value` и `setActivePinia(undefined)`. Payload сериализует Nuxt через `devalue`;
