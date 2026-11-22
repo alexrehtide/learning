@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Каждый элемент HTML относится к категориям контента (flow, phrasing, interactive и др.) и имеет **модель контента** — список того, что можно положить внутрь. Часть нарушений парсер исправляет сам, перестраивая дерево по алгоритму спецификации (`<div>` закрывает `<p>`, `<a>` внутри `<a>` становится соседом), поэтому DOM может не совпасть с шаблоном. Остальные нарушения он оставляет как есть. Семантика — не стиль: от тега зависят роль в дереве доступности, поведение с клавиатуры, работа поиска и встроенная интерактивность (`<details>`, `<dialog>`, `popover`). Для медиа главное — размеры у `<img>` (место резервируется до загрузки), политика autoplay (без звука можно, со звуком — после жеста) и `sandbox` у чужого `<iframe>`.
 
-**Связанные темы:** [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [DOM API и observers](../browser/dom.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Оптимизация загрузки](../performance/loading.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md), [CSRF, clickjacking и supply chain](../security/csrf-and-clickjacking.md), [SEO и обработка ошибок](../nuxt/seo-and-errors.md)
+**Связанные темы:** [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [DOM API и observers](../browser/dom.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Оптимизация загрузки](../performance/loading.md), [Core Web Vitals и измерение](../performance/web-vitals.md), [UI-coding: базовые компоненты на Vue](../live-coding/ui-components.md), [CSRF, clickjacking и supply chain](../security/csrf-and-clickjacking.md), [SEO и обработка ошибок](../nuxt/seo-and-errors.md), [HTML-формы и нативная валидация](./html-forms.md)
 
 ## Теория
 
@@ -88,7 +88,7 @@ Sectioning content — только `<article>`, `<aside>`, `<nav>`, `<section>`
 ### `button`, `a` и `div` с обработчиком
 
 - **`<a href>`** — навигация: у ссылки есть URL, её можно открыть в новой вкладке, скопировать, её видит краулер. `<a>` без `href` — не ссылка: не фокусируется и не активируется.
-- **`<button>`** — действие на этой странице. Фокус, роль `button`, активация с клавиатуры — бесплатно. Внутри `<form>` у кнопки по умолчанию `type="submit"` (подробнее — в следующей теме раздела, «HTML-формы»).
+- **`<button>`** — действие на этой странице. Фокус, роль `button`, активация с клавиатуры — бесплатно. Внутри `<form>` у кнопки по умолчанию `type="submit"` (подробнее — в «[HTML-формах и нативной валидации](./html-forms.md#button-и-неявная-отправка)»).
 - **`<div @click>`** — ничего из этого: нет фокуса, нет роли, нет клавиатуры.
 
 Проверено: Tab обходит `<button>`, `<a href>` и `<span role="button" tabindex="0">`, но не `<div onclick>` и не `<a>` без `href`. `<button>` даёт `click` на Enter (на keydown) и на Space (на keyup). `<a href>` — только на Enter, Space прокручивает страницу. `<span role="button" tabindex="0">` не даёт `click` ни на одну клавишу: `role` меняет только то, что объявляется скринридеру, поведение нужно писать самому. Поэтому «кнопка-div» с ARIA — это переписывание `<button>`, обычно с ошибками.
