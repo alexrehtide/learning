@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Nuxt при сборке превращает файлы `app/pages/` в обычные записи Vue Router: каждая страница — ленивый чанк, а метаданные из `definePageMeta` вырезаются в отдельный модуль и попадают в общий бандл. `<NuxtPage>` — это `RouterView`, обёрнутый в `Suspense`, `Transition` и `KeepAlive`, и с ключом по пути: в отличие от голого Vue Router, смена параметра (`/users/1 → /users/2`) пересоздаёт страницу. `definePageMeta` — макрос компилятора, поэтому он вычисляется один раз при загрузке модуля и не видит состояние компонента. Layouts — асинхронные компоненты-обёртки, которые `<NuxtLayout>` выбирает по `meta.layout`.
 
-**Связанные темы:** [Vue Router](../vue/vue-router.md), [Структура проекта и auto-imports](./project-structure.md), [Middleware и плагины](./middleware-and-plugins.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](../vue/built-in-components.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Оптимизация загрузки](../performance/loading.md), [TypeScript во Vue](../vue/typescript.md), [`watch` и `watchEffect`](../vue/watchers.md), [Структура большого проекта и Feature-Sliced Design](../architecture/large-project-structure.md), [Разбор: лента новостей](../architecture/case-news-feed.md), [Работа с данными: `$fetch`, `useFetch`, `useAsyncData`](./data-fetching.md)
+**Связанные темы:** [Vue Router](../vue/vue-router.md), [Структура проекта и auto-imports](./project-structure.md), [Middleware и плагины](./middleware-and-plugins.md), [`KeepAlive`, `Teleport`, `Suspense`, `Transition` и асинхронные компоненты](../vue/built-in-components.md), [SSR и гидрация](../vue/ssr-and-hydration.md), [Оптимизация загрузки](../performance/loading.md), [TypeScript во Vue](../vue/typescript.md), [`watch` и `watchEffect`](../vue/watchers.md), [Структура большого проекта и Feature-Sliced Design](../architecture/large-project-structure.md), [Разбор: лента новостей](../architecture/case-news-feed.md), [Работа с данными: `$fetch`, `useFetch`, `useAsyncData`](./data-fetching.md), [SEO и обработка ошибок](./seo-and-errors.md)
 
 ## Теория
 
@@ -193,7 +193,7 @@ throw createError({ status: 404, statusText: `Not found: ${route.path}` })
 </script>
 ```
 
-Ответ — `404` и `app/error.vue` (или встроенная страница ошибки). Обработку ошибок подробно разбирает тема «SEO и обработка ошибок».
+Ответ — `404` и `app/error.vue` (или встроенная страница ошибки). Обработку ошибок подробно разбирает тема [«SEO и обработка ошибок»](./seo-and-errors.md).
 
 ### Маршрут без файла
 
