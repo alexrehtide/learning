@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** У загрузки три рычага: **обнаружение** — браузер должен узнать о ресурсе как можно раньше, **приоритет** — важное идёт первым, **байты** — грузить меньше и только нужное. Обнаружение ускоряют подсказки (`preload`, `modulepreload`, `preconnect`, `103 Early Hints`), приоритет задают `fetchpriority` и порядок в разметке, байты сокращают форматы изображений, `loading="lazy"`, сабсеттинг шрифтов и code splitting. Следующую навигацию ускоряют заранее: `prefetch` и Speculation Rules вплоть до пререндера страницы целиком. Цель — LCP: главный ресурс должен начать грузиться сразу после HTML и не стоять в очереди за второстепенным.
 
-**Связанные темы:** [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Core Web Vitals и измерение](./web-vitals.md), [HTTP-кэширование и CDN](../network/caching.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Web Workers, Service Workers и PWA](../browser/workers.md)
+**Связанные темы:** [От ввода URL до отображения страницы](../browser/from-url-to-pixels.md), [Core Web Vitals и измерение](./web-vitals.md), [HTTP-кэширование и CDN](../network/caching.md), [HTTP: методы, статусы, заголовки, версии](../network/http.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Web Workers, Service Workers и PWA](../browser/workers.md), [Семантический HTML и мультимедиа](../html-css/semantic-html.md)
 
 ## Теория
 
