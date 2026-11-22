@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Масштабировать приходится в первую очередь организацию: когда над одним фронтендом работают пять команд, узким местом становятся общие релизы и согласования, а не код. Есть три рычага разной цены. Монорепозиторий даёт общие пакеты и атомарные изменения, но релиз остаётся общим. Nuxt Layers собирают приложение из слоёв во время сборки, это тоже один деплой. Микрофронтенды дают командам независимый деплой, а платят за это дублированием зависимостей, сложной интеграцией и инфраструктурой. Senior начинает с вопроса «что именно мешает командам» и берёт самый дешёвый рычаг, который снимает проблему.
 
-**Связанные темы:** [Структура большого проекта и Feature-Sliced Design](large-project-structure.md), [Design system и UI-kit](design-systems.md), [Принципы и паттерны проектирования](principles-and-patterns.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Деревья и графы](../algorithms/trees-and-graphs.md), [Оптимизация загрузки](../performance/loading.md), [CSRF, clickjacking и supply chain](../security/csrf-and-clickjacking.md), [Структура проекта и auto-imports](../nuxt/project-structure.md)
+**Связанные темы:** [Структура большого проекта и Feature-Sliced Design](large-project-structure.md), [Design system и UI-kit](design-systems.md), [Принципы и паттерны проектирования](principles-and-patterns.md), [Модули: ESM и CommonJS](../javascript/modules.md), [Деревья и графы](../algorithms/trees-and-graphs.md), [Оптимизация загрузки](../performance/loading.md), [CSRF, clickjacking и supply chain](../security/csrf-and-clickjacking.md), [Структура проекта и auto-imports](../nuxt/project-structure.md), [Каскад, специфичность, наследование и custom properties](../html-css/cascade.md)
 
 ## Теория
 
@@ -85,7 +85,7 @@ Module Federation — runtime-композиция на уровне ES-моду
 - **Props сверху.** Хост передаёт remote-компоненту данные (пользователь, локаль, токен) как пропсы или через `customProps` в single-spa.
 - **Без общего стора.** Общий Pinia-стор между микрофронтендами связывает команды через форму состояния: изменение поля в нём — breaking change для всех. Серверное состояние каждый микрофронтенд загружает сам; общий кэш, если он нужен, — у HTTP-слоя, а не в сторе.
 
-Стили — отдельная боль runtime-композиции: CSS глобален. Спасают префиксы классов, CSS Modules или scoped-стили, `@layer` для порядка каскада и общий набор токенов из [design system](design-systems.md). Полную изоляцию дают только iframe и Shadow DOM.
+Стили — отдельная боль runtime-композиции: CSS глобален. Спасают префиксы классов, CSS Modules или scoped-стили, [`@layer`](../html-css/cascade.md) для порядка каскада и общий набор токенов из [design system](design-systems.md). Полную изоляцию дают только iframe и Shadow DOM.
 
 ### Когда микрофронтенды — ошибка
 
