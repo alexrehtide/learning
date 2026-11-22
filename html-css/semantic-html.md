@@ -42,7 +42,7 @@ level: ядро
 
 **Парсер оставляет как есть.** `<ul><div>x</div></ul>` и `<button><a href="/">x</a></button>` невалидны, но дерево совпадает с разметкой. Это проблема доступности и валидатора, а не гидрации.
 
-Ловушка в том, что DOM API не проверяют модель контента: `p.innerHTML = '<div>x</div>'` даёт `<p><div>x</div></p>`. Так строит дерево и Vue на клиенте. А сервер отдаёт строку, браузер разбирает её парсером и получает другое дерево. Отсюда hydration mismatch, разобранный в «[SSR и гидрации](../vue/ssr-and-hydration.md)».
+Ловушка в том, что DOM API не проверяют модель контента: и `p.innerHTML = '<div>x</div>'`, и `p.append(div)` дают `<p><div>x</div></p>`. Vue на клиенте создаёт элементы через `createElement` и `insertBefore` и тоже получает такое дерево. А сервер отдаёт строку, браузер разбирает её парсером и получает другое дерево. Отсюда hydration mismatch, разобранный в «[SSR и гидрации](../vue/ssr-and-hydration.md)».
 
 > [!NOTE]
 > Компилятор Vue 3.5 в dev проверяет вложенность (`validateHtmlNesting` в `@vue/compiler-dom`) и пишет `<div> cannot be child of <p>, according to HTML specifications`. Предупреждения есть для `<div>` в `<p>`, `<a>` в `<a>` и `<tr>` прямо в `<table>`. Для `<ul><div>` и `<button><a>` их нет: парсер такие деревья не перестраивает. В prod-сборке проверка вырезана.
@@ -160,7 +160,7 @@ Inline `<svg>` — часть DOM: его стилизует CSS страниц�
 
 ### Семантика для SEO
 
-Поисковик извлекает структуру из разметки: `<title>`, заголовки, текст ссылок, `alt`. Google переходит по `<a href>`, а не по элементам с обработчиком клика, поэтому навигация на `<div @click="router.push()">` для краулера не существует. **Структурированные данные** описывают сущность словарём schema.org. Google рекомендует формат JSON-LD — `<script type="application/ld+json">` в документе, отдельно от разметки. Данные должны совпадать с видимым содержимым страницы. Как вывести JSON-LD в Nuxt безопасно — в «[SEO и обработке ошибок](../nuxt/seo-and-errors.md)».
+Поисковик извлекает структуру из разметки: `<title>`, заголовки, текст ссылок, `alt`. Google переходит только по `<a href>`, а не по элементам с обработчиком клика, поэтому навигация на `<div @click="router.push()">` для краулера не существует. **Структурированные данные** описывают сущность словарём schema.org. Google рекомендует формат JSON-LD — `<script type="application/ld+json">` в документе, отдельно от разметки. Данные должны совпадать с видимым содержимым страницы. Как вывести JSON-LD в Nuxt безопасно — в «[SEO и обработке ошибок](../nuxt/seo-and-errors.md)».
 
 ## Примеры
 
@@ -387,7 +387,7 @@ function onToggle(event: ToggleEvent, id: string) {
 ```
 
 - **Письмо** — пустой `sandbox`: скрипты, формы и навигация верхнего окна запрещены, origin непрозрачный. `srcdoc` без `sandbox` унаследовал бы ваш origin, и `<script>` из письма получил бы доступ к странице. Безопаснее всего отдавать такое превью с отдельного домена (`usercontent.example`).
-- **Виджет партнёра** — `allow-same-origin` здесь допустим, потому что origin чужой: виджет получает **свой** origin (свои cookies для 3-D Secure), но не ваш. Снять `sandbox` с вашего `<iframe>` он не может, `parent.document` для него закрыт политикой same-origin. `allow-popups` нужен окну банка, `allow="payment"` открывает Payment Request API.
+- **Виджет партнёра** — `allow-same-origin` здесь допустим, потому что origin чужой: виджет получает **свой** origin (без него у виджета не было бы своего хранилища и cookies), но не ваш. Снять `sandbox` с вашего `<iframe>` он не может, `parent.document` для него закрыт политикой same-origin. `allow-popups` нужен окну банка, `allow="payment"` открывает Payment Request API.
 - `title` нужен скринридеру. Обмен с виджетом — `postMessage` с проверкой `event.origin === 'https://pay.partner.example'` и явным `targetOrigin` при отправке, а не `'*'`.
 - Ваши собственные страницы от встраивания в чужие iframe защищает `frame-ancestors` (clickjacking), см. «[CSRF, clickjacking и supply chain](../security/csrf-and-clickjacking.md)».
 :::
@@ -412,4 +412,5 @@ function onToggle(event: ToggleEvent, id: string) {
 - [MDN browser-compat-data](https://github.com/mdn/browser-compat-data)
 - [Vue: `@vue/compiler-dom`, htmlNesting](https://github.com/vuejs/core/blob/main/packages/compiler-dom/src/htmlNesting.ts)
 - [web.dev: Optimize Cumulative Layout Shift](https://web.dev/articles/optimize-cls)
+- [Google Search Central: Make your links crawlable](https://developers.google.com/search/docs/crawling-indexing/links-crawlable)
 - [Google Search Central: Introduction to structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)
