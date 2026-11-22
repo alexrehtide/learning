@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Каждый элемент порождает бокс из четырёх областей: content, padding, border, margin. `box-sizing` решает, к какой из них относится `width`. Внешний тип `display` задаёт, как бокс участвует в раскладке родителя (block или inline), внутренний — как он раскладывает детей (flow, flow-root, flex, grid). Block formatting context (BFC) — изолированная область потока: он содержит свои float, не наезжает на чужие и не схлопывает margin с детьми. Вертикальные margin соседних блоков в одном BFC схлопываются в один: берётся максимум положительных плюс минимум отрицательных. Схлопывание не происходит во flex и grid, через padding или border и на границе BFC.
 
-**Связанные темы:** [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Каскад, специфичность, наследование и custom properties](./cascade.md), [Семантический HTML и мультимедиа](./semantic-html.md), [Стили в компонентах: scoped, CSS Modules, `v-bind()` в `<style>`](../vue/styles.md)
+**Связанные темы:** [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [Каскад, специфичность, наследование и custom properties](./cascade.md), [Семантический HTML и мультимедиа](./semantic-html.md), [Стили в компонентах: scoped, CSS Modules, `v-bind()` в `<style>`](../vue/styles.md), [Селекторы, псевдоклассы и псевдоэлементы](./selectors.md)
 
 ## Теория
 

@@ -7,7 +7,7 @@ level: ядро
 
 > **Коротко.** Для каждого свойства каждого элемента браузер собирает все подходящие объявления, а каскад (cascade) сортирует их по критериям: origin и `!important`, контекст shadow DOM, атрибут `style`, каскадные слои `@layer`, специфичность, близость `@scope`, порядок появления. Каждый следующий критерий проверяется только при равенстве предыдущих. Если победителя нет, значение берётся по наследованию или из начального значения. Дальше значение проходит стадии specified → computed → used, и наследуется именно computed value. Custom properties тоже наследуются, а `var()` подставляется на этапе computed value. Поэтому неподходящее значение не откатывается к прошлому объявлению, а делает свойство invalid at computed-value time.
 
-**Связанные темы:** [Стили в компонентах: scoped, CSS Modules, `v-bind()` в `<style>`](../vue/styles.md), [Design system и UI-kit](../architecture/design-systems.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [DOM API и observers](../browser/dom.md), [Масштабирование фронтенда](../architecture/scaling-frontend.md), [Семантический HTML и мультимедиа](./semantic-html.md), [Box model, BFC и схлопывание отступов](./box-model.md)
+**Связанные темы:** [Стили в компонентах: scoped, CSS Modules, `v-bind()` в `<style>`](../vue/styles.md), [Design system и UI-kit](../architecture/design-systems.md), [Конвейер рендеринга: layout, paint, composite](../browser/rendering-pipeline.md), [DOM API и observers](../browser/dom.md), [Масштабирование фронтенда](../architecture/scaling-frontend.md), [Семантический HTML и мультимедиа](./semantic-html.md), [Box model, BFC и схлопывание отступов](./box-model.md), [Селекторы, псевдоклассы и псевдоэлементы](./selectors.md)
 
 ## Теория
 
@@ -100,7 +100,7 @@ level: ядро
 - В обычном списке `#nope, p { … }` каждый селектор считается отдельно, и берётся тот, что совпал. Здесь — `p`.
 - **CSS Nesting** заворачивает родителя в `:is()`: правило `#nope, .a { & p { … } }` — это `:is(#nope, .a) p` со специфичностью (1, 0, 1). Проверено: оно выиграло у `.a p.c`.
 
-Подробно о самих селекторах — в теме «Селекторы, псевдоклассы и псевдоэлементы».
+Подробно о самих селекторах — в теме «[Селекторы, псевдоклассы и псевдоэлементы](./selectors.md)».
 
 ### `@scope` и близость
 
